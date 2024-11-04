@@ -7,11 +7,16 @@ environment:
   sdk: ^3.5.1
 
 dependencies:
+  cached_network_image: ^3.4.1
+  dartz: ^0.10.1
   dio: ^5.7.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.2.1
-  logger: ^2.4.0
+  get_it: ^8.0.2
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  skeletonizer: ^1.4.2
 
 dev_dependencies:
   flutter_lints: ^4.0.0
