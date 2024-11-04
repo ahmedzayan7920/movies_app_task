@@ -1,41 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'features/auth/logic/login_provider.dart';
+import 'features/auth/ui/views/login_view.dart';
+import 'features/movies/ui/views/movies_view.dart';
+import 'package:provider/provider.dart';
 
-import 'core/networks/api_response.dart';
-import 'core/networks/dio_client.dart';
-
-Future<Resource<List<Movie>>> fetchMovies() async {
-  final apiService = DioClient();
-  final response = await apiService.getRequest('/movie/popular');
-  if (response.data != null) {
-    List<Movie> movies =
-        (response.data!['results'] as List).map((e) => Movie.fromJson(e)).toList();
-    return Resource.success(movies);
-  } else {
-    return Resource.error(response.error ?? "unknownError");
-  }
-}
-
-class Movie {
-  final int id;
-  final String title;
-  final String posterPath;
-
-  Movie({required this.id, required this.title, required this.posterPath});
-
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
-      id: json['id'],
-      title: json['title'],
-      posterPath: json['poster_path'],
-    );
-  }
-}
+import 'core/app/app_router.dart';
+import 'core/app/di.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-  final movies = await fetchMovies();
-  print(movies.status);
+  await setupServiceLocator();
   runApp(const MainApp());
 }
 
@@ -44,10 +20,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return ChangeNotifierProvider.value(
+      value: getIt<LoginProvider>(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(useMaterial3: true),
+        onGenerateRoute: AppRouter.generateRoute,
+        home: Consumer<LoginProvider>(
+          builder: (BuildContext context, LoginProvider value, Widget? child) {
+            return value.isLoggedIn ? const MoviesView() : const LoginView();
+          },
         ),
       ),
     );
