@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/features/movies/ui/widgets/common/blurred_background_image.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -27,10 +28,16 @@ class MovieDetailsView extends StatelessWidget {
                     movieDetails: provider.fakeMovieDetails,
                   ),
                 );
-              case MovieDetailsLoadedState(:final movieDetails):
-                return MovieDetailsItem(movieDetails: movieDetails);
-              case MovieDetailsErrorState(:final message):
-                return Center(child: Text('Error: $message'));
+              case MovieDetailsLoadedState():
+                return MovieDetailsItem(movieDetails: state.movieDetails);
+              case MovieDetailsErrorState():
+                return BlurredBackgroundImage(
+                  imageUrl: '',
+                  withBackArrow: true,
+                  child: Center(
+                    child: Text('Error: ${state.message}'),
+                  ),
+                );
             }
           },
         ),

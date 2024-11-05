@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/core/widgets/animated_logo.dart';
+import '../../../../core/widgets/animated_logo.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/form_validation_provider.dart';

@@ -1,24 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../app/app_env.dart';
 
 import '../error/failure.dart';
-import 'api_interceptor.dart';
 import 'base_api_service.dart';
 import 'dio_error_handler.dart';
 
 class DioClient implements BaseApiService {
-  late final Dio _dio;
+  final Dio _dio;
 
-  DioClient() {
-    _dio = Dio(
-      BaseOptions(
-        baseUrl: AppEnv.baseUrl ?? "",
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
-      ),
-    )..interceptors.add(ApiInterceptor());
-  }
+  DioClient(this._dio);
 
   @override
   Future<Either<Failure, T>> get<T, M>({
@@ -33,7 +23,6 @@ class DioClient implements BaseApiService {
         queryParameters: queryParameters,
         options: Options(extra: {'dataKey': dataKey}),
       );
-
       final data = _parseResponse<T, M>(response.data, fromJson);
       return Right(data);
     } on DioException catch (e) {

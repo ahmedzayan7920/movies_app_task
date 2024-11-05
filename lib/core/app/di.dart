@@ -10,14 +10,17 @@ import '../../features/movies/logic/movies/movies_provider.dart';
 import '../../features/movies/repos/movie_repository.dart';
 import '../../features/movies/repos/movie_repository_impl.dart';
 import '../network/dio_client.dart';
+import '../network/dio_config.dart';
 
 final GetIt getIt = GetIt.instance;
 
- setupServiceLocator() async{
+Future<void> setupServiceLocator() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
-  getIt.registerLazySingleton<DioClient>(() => DioClient());
+  final dio = await DioConfig.createDio();
+  getIt.registerLazySingleton<DioClient>(() => DioClient(dio));
+
   getIt.registerLazySingleton<MovieRepository>(
       () => MovieRepositoryImpl(getIt<DioClient>()));
   getIt.registerFactory<MoviesProvider>(
@@ -25,13 +28,10 @@ final GetIt getIt = GetIt.instance;
   getIt.registerFactory<MovieDetailsProvider>(
       () => MovieDetailsProvider(getIt<MovieRepository>()));
 
-
   getIt.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sharedPreferences: getIt()));
 
   getIt.registerLazySingleton<LoginProvider>(
       () => LoginProvider(authRepository: getIt<AuthRepository>()));
-  getIt.registerFactory<FormValidationProvider>(
-      () => FormValidationProvider());
-
+  getIt.registerFactory<FormValidationProvider>(() => FormValidationProvider());
 }
