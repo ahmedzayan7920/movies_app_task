@@ -13,7 +13,9 @@ class LoginView extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: getIt<FormValidationProvider>(),
       child: const Scaffold(
-        body: SafeArea(child: LoginForm()),
+        body: SafeArea(
+          child: LoginForm(),
+        ),
       ),
     );
   }
