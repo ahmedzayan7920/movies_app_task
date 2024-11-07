@@ -14,7 +14,7 @@ abstract class DioCacheConfig {
       store: cacheStore,
       policy: CachePolicy.forceCache,
       priority: CachePriority.high,
-      maxStale: const Duration(minutes: 5),
+      maxStale: const Duration(minutes: 1),
       hitCacheOnErrorExcept: [401, 404],
       keyBuilder: (request) => request.uri.toString(),
       allowPostMethod: false,

@@ -19,22 +19,4 @@ class ApiInterceptor extends Interceptor {
     }
     handler.next(response);
   }
-
-  @override
-  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
-    if (err.response?.data is Map<String, dynamic>) {
-      final errorData = err.response?.data as Map<String, dynamic>;
-      final errorMessage = errorData['status_message'] ?? 'Unknown server error';
-      handler.next(
-        DioException(
-          requestOptions: err.requestOptions,
-          response: err.response,
-          error: errorMessage,
-          type: err.type,
-        ),
-      );
-    } else {
-      handler.next(err);
-    }
-  }
 }
