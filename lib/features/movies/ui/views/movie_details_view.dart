@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/widgets/custom_error_message.dart';
 import 'package:movies_app_task/features/movies/ui/widgets/common/blurred_background_image.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,25 +21,30 @@ class MovieDetailsView extends StatelessWidget {
         body: Consumer<MovieDetailsProvider>(
           builder: (context, provider, child) {
             final state = provider.state;
-            switch (state) {
-              case MovieDetailsLoadingState():
-                return Skeletonizer(
-                  enabled: true,
-                  child: MovieDetailsItem(
-                    movieDetails: provider.fakeMovieDetails,
-                  ),
-                );
-              case MovieDetailsLoadedState():
-                return MovieDetailsItem(movieDetails: state.movieDetails);
-              case MovieDetailsErrorState():
-                return BlurredBackgroundImage(
-                  imageUrl: '',
-                  withBackArrow: true,
-                  child: Center(
-                    child: Text('Error: ${state.message}'),
-                  ),
-                );
-            }
+            return RefreshIndicator(
+              onRefresh: () => provider.loadMovieDetails(movieId: movieId),
+              child: Builder(
+                builder: (context) {
+                  switch (state) {
+                    case MovieDetailsLoadingState():
+                      return Skeletonizer(
+                        enabled: true,
+                        child: MovieDetailsItem(
+                          movieDetails: provider.fakeMovieDetails,
+                        ),
+                      );
+                    case MovieDetailsLoadedState(:final movieDetails):
+                      return MovieDetailsItem(movieDetails: movieDetails);
+                    case MovieDetailsErrorState(:final message):
+                      return BlurredBackgroundImage(
+                        imageUrl: '',
+                        withBackArrow: true,
+                        child: CustomErrorMessage(message: message),
+                      );
+                  }
+                },
+              ),
+            );
           },
         ),
       ),
