@@ -1,1 +1,11 @@
-{}
+{
+    "emailFieldHint": "Email",
+    "passwordFieldHint": "Password",
+    "passwordRequirementAtLeast8Chars": "At least 8 characters",
+    "passwordRequirementOneLowerCase": "One lowercase letter",
+    "passwordRequirementOneUpperCase": "One uppercase letter",
+    "passwordRequirementOneSpecialChar": "One special character",
+    "passwordRequirementOneNumber": "One number",
+    "loginButton": "Login",
+    "errorInvalidCredentials": "Invalid credentials"
+}

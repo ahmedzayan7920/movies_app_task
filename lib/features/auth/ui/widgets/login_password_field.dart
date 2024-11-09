@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/utils/app_keys.dart';
+import 'package:movies_app_task/core/utils/app_strings.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -22,7 +24,7 @@ class _LoginPasswordFieldState extends State<LoginPasswordField> {
       builder: (context, formProvider, _) {
         final formState = formProvider.state;
         return CustomTextFormField(
-          labelText: 'Password',
+          labelText: AppStrings.passwordHint,
           prefixIcon: Icons.lock_outline,
           suffixIcon: _obscureText
               ? Icons.visibility_off_outlined
@@ -38,7 +40,7 @@ class _LoginPasswordFieldState extends State<LoginPasswordField> {
           obscureText: _obscureText,
           isPassword: true,
           errorText: formState is FormInvalidState
-              ? formState.errors['password']
+              ? formState.errors[AppKeys.password]
               : null,
         );
       },

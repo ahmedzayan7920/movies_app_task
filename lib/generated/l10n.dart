@@ -49,6 +49,96 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Email`
+  String get emailFieldHint {
+    return Intl.message(
+      'Email',
+      name: 'emailFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get passwordFieldHint {
+    return Intl.message(
+      'Password',
+      name: 'passwordFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 8 characters`
+  String get passwordRequirementAtLeast8Chars {
+    return Intl.message(
+      'At least 8 characters',
+      name: 'passwordRequirementAtLeast8Chars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One lowercase letter`
+  String get passwordRequirementOneLowerCase {
+    return Intl.message(
+      'One lowercase letter',
+      name: 'passwordRequirementOneLowerCase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One uppercase letter`
+  String get passwordRequirementOneUpperCase {
+    return Intl.message(
+      'One uppercase letter',
+      name: 'passwordRequirementOneUpperCase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One special character`
+  String get passwordRequirementOneSpecialChar {
+    return Intl.message(
+      'One special character',
+      name: 'passwordRequirementOneSpecialChar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One number`
+  String get passwordRequirementOneNumber {
+    return Intl.message(
+      'One number',
+      name: 'passwordRequirementOneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get loginButton {
+    return Intl.message(
+      'Login',
+      name: 'loginButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid credentials`
+  String get errorInvalidCredentials {
+    return Intl.message(
+      'Invalid credentials',
+      name: 'errorInvalidCredentials',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

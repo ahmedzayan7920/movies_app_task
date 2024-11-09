@@ -1,1 +1,11 @@
-{}
+{
+    "emailFieldHint": "البريد الإلكتروني",
+    "passwordFieldHint": "كلمة المرور",
+    "passwordRequirementAtLeast8Chars": "ثمانية أحرف على الأقل",
+    "passwordRequirementOneLowerCase": "حرف صغير واحد",
+    "passwordRequirementOneUpperCase": "حرف كبير واحد",
+    "passwordRequirementOneSpecialChar": "حرف خاص واحد",
+    "passwordRequirementOneNumber": "رقم واحد",
+    "loginButton": "تسجيل الدخول",
+    "errorInvalidCredentials": "بيانات تسجبل الدخول غير صالحة"
+}

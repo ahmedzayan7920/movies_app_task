@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/utils/app_keys.dart';
 
 import '../../../core/utils/email_validator.dart';
 import '../../../core/utils/password_validator.dart';
@@ -51,12 +52,12 @@ class FormValidationProvider extends ChangeNotifier {
 
     final emailError = EmailValidator.validate(_email);
     if (emailError != null) {
-      errors['email'] = emailError;
+      errors[AppKeys.email] = emailError;
     }
 
     final passwordError = PasswordValidator.validate(_passwordState.password);
     if (passwordError != null) {
-      errors['password'] = passwordError;
+      errors[AppKeys.password] = passwordError;
     }
 
     if (errors.isEmpty) {

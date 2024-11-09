@@ -21,5 +21,23 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "emailFieldHint":
+            MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "errorInvalidCredentials": MessageLookupByLibrary.simpleMessage(
+            "بيانات تسجبل الدخول غير صالحة"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "passwordFieldHint":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "passwordRequirementAtLeast8Chars":
+            MessageLookupByLibrary.simpleMessage("ثمانية أحرف على الأقل"),
+        "passwordRequirementOneLowerCase":
+            MessageLookupByLibrary.simpleMessage("حرف صغير واحد"),
+        "passwordRequirementOneNumber":
+            MessageLookupByLibrary.simpleMessage("رقم واحد"),
+        "passwordRequirementOneSpecialChar":
+            MessageLookupByLibrary.simpleMessage("حرف خاص واحد"),
+        "passwordRequirementOneUpperCase":
+            MessageLookupByLibrary.simpleMessage("حرف كبير واحد")
+      };
 }

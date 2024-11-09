@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/utils/app_strings.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/app/app_routes.dart';
@@ -19,7 +20,7 @@ class LoginButton extends StatelessWidget {
         return CustomElevatedButton(
           onPressed: isLoading ? null : () => _login(context),
           isLoading: isLoading,
-          text: "Login",
+          text: AppStrings.login,
         );
       },
     );

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -40,12 +42,9 @@ class MainApp extends StatelessWidget {
             Widget? child) {
           final state = languageProvider.state;
 
-          Locale locale = const Locale('en'); // Default locale
+          Locale locale = PlatformDispatcher.instance.locale;
           if (state is LanguageLoaded) {
             locale = state.locale;
-            print(locale); // Log locale for debugging
-          } else if (state is LanguageError) {
-            print(state.errorMessage); // Log error for debugging
           }
           return MaterialApp(
             key: ValueKey(locale.languageCode),
