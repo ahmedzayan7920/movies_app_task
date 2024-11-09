@@ -21,12 +21,8 @@ Future<void> setupServiceLocator() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
-  getIt.registerLazySingleton<LanguageRepository>(
-      () => LanguageRepositoryImpl(sharedPreferences: getIt()));
-
   getIt.registerLazySingleton<AuthInterceptor>(() => AuthInterceptor());
-  getIt.registerLazySingleton<LanguageInterceptor>(
-      () => LanguageInterceptor(languageRepository: getIt()));
+  getIt.registerLazySingleton<LanguageInterceptor>(() => LanguageInterceptor());
   getIt.registerLazySingleton<ResponseInterceptor>(() => ResponseInterceptor());
 
   CacheOptions cacheOptions = await DioCacheConfig.getDefaultCacheOptions();
@@ -48,4 +44,7 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sharedPreferences: getIt()));
+
+  getIt.registerLazySingleton<LanguageRepository>(
+      () => LanguageRepositoryImpl(sharedPreferences: getIt()));
 }
