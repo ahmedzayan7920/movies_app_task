@@ -37,6 +37,13 @@ class MoviesProvider extends ChangeNotifier {
       backdropImage: '',
       voteAverage: 7.5,
       voteCount: 1000,
+      adult: false,
+      genreIds: [28, 12, 878],
+      originalLanguage: 'en',
+      originalTitle: 'Venom: The Last Dance',
+      popularity: 100.0,
+      releaseDate: '2021-10-01',
+      video: false,
     ),
   );
 

@@ -1,11 +1,12 @@
-import '../../models/movie_details_model.dart';
+
+import '../../models/movie_model.dart';
 
 sealed class MovieDetailsState {}
 
 class MovieDetailsLoadingState extends MovieDetailsState {}
 
 class MovieDetailsLoadedState extends MovieDetailsState {
-  final MovieDetailsModel movieDetails;
+  final MovieModel movieDetails;
   MovieDetailsLoadedState(this.movieDetails);
 }
 

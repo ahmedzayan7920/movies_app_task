@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/features/movies/models/movie_model.dart';
 
-import '../../models/movie_details_model.dart';
 import '../../repos/movie_repository.dart';
 import 'movie_details_state.dart';
 
@@ -27,7 +27,7 @@ class MovieDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  final _fakeMovieDetails = MovieDetailsModel(
+  final _fakeMovieDetails = MovieModel(
     id: 0,
     title: 'Venom: The Last Dance',
     overview: 'Overview of the movie Venom: The Last Dance ...',
@@ -67,13 +67,22 @@ class MovieDetailsProvider extends ChangeNotifier {
       SpokenLanguage(
         iso6391: 'en',
         name: 'English',
+        englishName: 'English',
       ),
       SpokenLanguage(
         iso6391: 'fr',
         name: 'Français',
+        englishName: 'French',
       ),
     ],
+    adult: false,
+    backdropImage: '',
+    genreIds: [0, 1],
+    originalLanguage: 'en',
+    originalTitle: 'Venom: The Last Dance',
+    popularity: 100.0,
+    video: false,
   );
 
-  MovieDetailsModel get fakeMovieDetails => _fakeMovieDetails;
+  MovieModel get fakeMovieDetails => _fakeMovieDetails;
 }

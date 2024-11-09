@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/movie_details_model.dart';
+import 'package:movies_app_task/features/movies/models/movie_model.dart';
 import '../common/movie_overview.dart';
 import '../common/movie_poster_image.dart';
 import '../common/movie_title.dart';
@@ -11,7 +11,7 @@ import 'movie_rich_text.dart';
 
 class MovieDetailsItem extends StatelessWidget {
   const MovieDetailsItem({super.key, required this.movieDetails});
-  final MovieDetailsModel movieDetails;
+  final MovieModel movieDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class MovieDetailsItem extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Center(
-              child: MovieGenres(genres: movieDetails.genres),
+              child: MovieGenres(genres: movieDetails.genres??[]),
             ),
             const SizedBox(height: 10),
             MovieOverview(overview: movieDetails.overview),
@@ -60,19 +60,17 @@ class MovieDetailsItem extends StatelessWidget {
             ),
             MovieRichText(
               title: "Countries: ",
-              value: movieDetails.productionCountries
-                  .map((e) => e.name)
-                  .join(', '),
+              value: (movieDetails.productionCountries?.map((e) => e.name).join(', ')) ?? 'N/A',
             ),
             MovieRichText(
               title: "Languages: ",
-              value: movieDetails.spokenLanguages.map((e) => e.name).join(', '),
+              value: movieDetails.spokenLanguages?.map((e) => e.name).join(', ') ?? 'N/A',
             ),
             MovieRichText(
               title: "Companies: ",
               value: movieDetails.productionCompanies
-                  .map((e) => e.name)
-                  .join(', '),
+              ?.map((e) => e.name)
+              .join(', ') ?? 'N/A',
             ),
           ],
         ),
