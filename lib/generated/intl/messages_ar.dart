@@ -24,20 +24,27 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "emailFieldHint":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "emailInvalid": MessageLookupByLibrary.simpleMessage(
+            "يرجى إدخال بريد إلكتروني صالح"),
+        "emailRequired": MessageLookupByLibrary.simpleMessage(
+            "يرجى إدخال البريد الإلكتروني"),
         "errorInvalidCredentials": MessageLookupByLibrary.simpleMessage(
-            "بيانات تسجبل الدخول غير صالحة"),
+            "بيانات تسجيل الدخول غير صالحة"),
         "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "passwordFieldHint":
             MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "passwordRequired":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال كلمة المرور"),
         "passwordRequirementAtLeast8Chars":
-            MessageLookupByLibrary.simpleMessage("ثمانية أحرف على الأقل"),
+            MessageLookupByLibrary.simpleMessage(
+                "يجب أن تحتوي على ثمانية أحرف على الأقل"),
         "passwordRequirementOneLowerCase":
-            MessageLookupByLibrary.simpleMessage("حرف صغير واحد"),
-        "passwordRequirementOneNumber":
-            MessageLookupByLibrary.simpleMessage("رقم واحد"),
+            MessageLookupByLibrary.simpleMessage("يجب أن تحتوي على حرف صغير"),
+        "passwordRequirementOneNumber": MessageLookupByLibrary.simpleMessage(
+            "يجب أن تحتوي على رقم واحد على الأقل"),
         "passwordRequirementOneSpecialChar":
-            MessageLookupByLibrary.simpleMessage("حرف خاص واحد"),
+            MessageLookupByLibrary.simpleMessage("يجب أن تحتوي على حرف خاص"),
         "passwordRequirementOneUpperCase":
-            MessageLookupByLibrary.simpleMessage("حرف كبير واحد")
+            MessageLookupByLibrary.simpleMessage("يجب أن تحتوي على حرف كبير")
       };
 }

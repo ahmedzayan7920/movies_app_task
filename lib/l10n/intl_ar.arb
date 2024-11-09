@@ -1,11 +1,16 @@
 {
     "emailFieldHint": "البريد الإلكتروني",
     "passwordFieldHint": "كلمة المرور",
-    "passwordRequirementAtLeast8Chars": "ثمانية أحرف على الأقل",
-    "passwordRequirementOneLowerCase": "حرف صغير واحد",
-    "passwordRequirementOneUpperCase": "حرف كبير واحد",
-    "passwordRequirementOneSpecialChar": "حرف خاص واحد",
-    "passwordRequirementOneNumber": "رقم واحد",
+    
+    "emailRequired": "يرجى إدخال البريد الإلكتروني",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+    "passwordRequired": "يرجى إدخال كلمة المرور",
+    "passwordRequirementAtLeast8Chars": "يجب أن تحتوي على ثمانية أحرف على الأقل",
+    "passwordRequirementOneLowerCase": "يجب أن تحتوي على حرف صغير",
+    "passwordRequirementOneUpperCase": "يجب أن تحتوي على حرف كبير",
+    "passwordRequirementOneSpecialChar": "يجب أن تحتوي على حرف خاص",
+    "passwordRequirementOneNumber": "يجب أن تحتوي على رقم واحد على الأقل",
+    
     "loginButton": "تسجيل الدخول",
-    "errorInvalidCredentials": "بيانات تسجبل الدخول غير صالحة"
+    "errorInvalidCredentials": "بيانات تسجيل الدخول غير صالحة"
 }

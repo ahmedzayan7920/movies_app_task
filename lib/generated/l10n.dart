@@ -70,50 +70,80 @@ class S {
     );
   }
 
-  /// `At least 8 characters`
+  /// `Email is required`
+  String get emailRequired {
+    return Intl.message(
+      'Email is required',
+      name: 'emailRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid email`
+  String get emailInvalid {
+    return Intl.message(
+      'Enter a valid email',
+      name: 'emailInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required`
+  String get passwordRequired {
+    return Intl.message(
+      'Password is required',
+      name: 'passwordRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Must be at least 8 characters`
   String get passwordRequirementAtLeast8Chars {
     return Intl.message(
-      'At least 8 characters',
+      'Must be at least 8 characters',
       name: 'passwordRequirementAtLeast8Chars',
       desc: '',
       args: [],
     );
   }
 
-  /// `One lowercase letter`
+  /// `Must contain a lowercase letter`
   String get passwordRequirementOneLowerCase {
     return Intl.message(
-      'One lowercase letter',
+      'Must contain a lowercase letter',
       name: 'passwordRequirementOneLowerCase',
       desc: '',
       args: [],
     );
   }
 
-  /// `One uppercase letter`
+  /// `Must contain an uppercase letter`
   String get passwordRequirementOneUpperCase {
     return Intl.message(
-      'One uppercase letter',
+      'Must contain an uppercase letter',
       name: 'passwordRequirementOneUpperCase',
       desc: '',
       args: [],
     );
   }
 
-  /// `One special character`
+  /// `Must contain a special character`
   String get passwordRequirementOneSpecialChar {
     return Intl.message(
-      'One special character',
+      'Must contain a special character',
       name: 'passwordRequirementOneSpecialChar',
       desc: '',
       args: [],
     );
   }
 
-  /// `One number`
+  /// `Must contain at least one number`
   String get passwordRequirementOneNumber {
     return Intl.message(
-      'One number',
+      'Must contain at least one number',
       name: 'passwordRequirementOneNumber',
       desc: '',
       args: [],

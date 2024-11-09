@@ -1,11 +1,16 @@
 {
     "emailFieldHint": "Email",
     "passwordFieldHint": "Password",
-    "passwordRequirementAtLeast8Chars": "At least 8 characters",
-    "passwordRequirementOneLowerCase": "One lowercase letter",
-    "passwordRequirementOneUpperCase": "One uppercase letter",
-    "passwordRequirementOneSpecialChar": "One special character",
-    "passwordRequirementOneNumber": "One number",
+    
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter a valid email",
+    "passwordRequired": "Password is required",
+    "passwordRequirementAtLeast8Chars": "Must be at least 8 characters",
+    "passwordRequirementOneLowerCase": "Must contain a lowercase letter",
+    "passwordRequirementOneUpperCase": "Must contain an uppercase letter",
+    "passwordRequirementOneSpecialChar": "Must contain a special character",
+    "passwordRequirementOneNumber": "Must contain at least one number",
+    
     "loginButton": "Login",
     "errorInvalidCredentials": "Invalid credentials"
 }

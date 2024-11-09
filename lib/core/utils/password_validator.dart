@@ -1,3 +1,5 @@
+import 'app_strings.dart';
+
 class PasswordValidator {
   static const int minLength = 8;
   
@@ -13,12 +15,12 @@ class PasswordValidator {
   static bool hasNumber(String password) => _numberRegExp.hasMatch(password);
   
   static String? validate(String? password) {
-    if (password == null || password.isEmpty) return 'Password is required';
-    if (!hasMinLength(password)) return 'Must be at least 8 characters';
-    if (!hasLowercase(password)) return 'Must contain a lowercase letter';
-    if (!hasUppercase(password)) return 'Must contain an uppercase letter';
-    if (!hasSpecialChar(password)) return 'Must contain a special character';
-    if (!hasNumber(password)) return 'Must contain at least one number';
+    if (password == null || password.isEmpty) return AppStrings.passwordRequired;
+    if (!hasMinLength(password)) return AppStrings.atLeast8Chars;
+    if (!hasLowercase(password)) return AppStrings.oneLowerLetter;
+    if (!hasUppercase(password)) return AppStrings.oneUpperLetter;
+    if (!hasSpecialChar(password)) return AppStrings.oneSpecialChar;
+    if (!hasNumber(password)) return AppStrings.oneNumber;
     return null;
   }
 }
