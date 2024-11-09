@@ -11,6 +11,10 @@ class LanguageProvider extends ChangeNotifier {
       : _languageRepository = languageRepository {
     _loadPreferredLanguage();
   }
+  final List<Map<String, String>> supportedLanguages = [
+    {'code': 'en', 'label': 'English'},
+    {'code': 'ar', 'label': 'Arabic'},
+  ];
 
   LanguageState get state => _state;
 
