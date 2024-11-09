@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 import '../app/app_env.dart';
-import 'api_interceptor.dart';
-import 'dio_cache_config.dart';
 
 abstract class DioConfig {
-  static Future<Dio> createDio() async {
+  DioConfig._();
+  static Future<Dio> createDio(
+      {required List<Interceptor> interceptors}) async {
     final dio = Dio(
       BaseOptions(
         baseUrl: AppEnv.baseUrl ?? "",
@@ -15,11 +14,7 @@ abstract class DioConfig {
       ),
     );
 
-    final cacheOptions = await DioCacheConfig.getDefaultCacheOptions();
-    dio.interceptors.addAll([
-      ApiInterceptor(),
-      DioCacheInterceptor(options: cacheOptions),
-    ]);
+    dio.interceptors.addAll(interceptors);
 
     return dio;
   }
