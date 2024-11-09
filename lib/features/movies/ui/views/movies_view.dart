@@ -11,8 +11,9 @@ class MoviesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: getIt<MoviesProvider>()..loadPopularMovies(),
+    return ChangeNotifierProvider(
+      create: (BuildContext context) =>
+          MoviesProvider(movieRepository: getIt()),
       child: const Scaffold(
         body: SafeArea(
           child: Padding(

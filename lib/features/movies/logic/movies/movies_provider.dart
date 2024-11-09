@@ -5,17 +5,20 @@ import '../../repos/movie_repository.dart';
 import 'movies_state.dart';
 
 class MoviesProvider extends ChangeNotifier {
-  final MovieRepository _repository;
+  final MovieRepository _movieRepository;
 
   MoviesState _state = MoviesLoadingState();
   MoviesState get state => _state;
 
-  MoviesProvider(this._repository);
+  MoviesProvider({required MovieRepository movieRepository})
+      : _movieRepository = movieRepository {
+    loadPopularMovies();
+  }
 
   Future<void> loadPopularMovies() async {
     _state = MoviesLoadingState();
     notifyListeners();
-    final result = await _repository.getPopularMovies();
+    final result = await _movieRepository.getPopularMovies();
     result.fold(
       (failure) {
         _state = MoviesErrorState(failure.message);

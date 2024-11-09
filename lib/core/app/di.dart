@@ -1,12 +1,10 @@
 import 'package:get_it/get_it.dart';
-import '../../features/auth/logic/form_validation_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/auth/logic/login_provider.dart';
 import '../../features/auth/repos/auth_repository.dart';
 import '../../features/auth/repos/auth_repository_impl.dart';
-import '../../features/movies/logic/movie_details/movie_details_provider.dart';
-import '../../features/movies/logic/movies/movies_provider.dart';
+import '../../features/localization/repos/language_repository.dart';
+import '../../features/localization/repos/language_repository_impl.dart';
 import '../../features/movies/repos/movie_repository.dart';
 import '../../features/movies/repos/movie_repository_impl.dart';
 import '../network/dio_client.dart';
@@ -23,15 +21,10 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerLazySingleton<MovieRepository>(
       () => MovieRepositoryImpl(getIt<DioClient>()));
-  getIt.registerFactory<MoviesProvider>(
-      () => MoviesProvider(getIt<MovieRepository>()));
-  getIt.registerFactory<MovieDetailsProvider>(
-      () => MovieDetailsProvider(getIt<MovieRepository>()));
 
   getIt.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sharedPreferences: getIt()));
 
-  getIt.registerLazySingleton<LoginProvider>(
-      () => LoginProvider(authRepository: getIt<AuthRepository>()));
-  getIt.registerFactory<FormValidationProvider>(() => FormValidationProvider());
+  getIt.registerLazySingleton<LanguageRepository>(
+      () => LanguageRepositoryImpl(sharedPreferences: getIt()));
 }

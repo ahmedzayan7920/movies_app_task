@@ -3,9 +3,10 @@ import '../repos/auth_repository.dart';
 import 'login_state.dart';
 
 class LoginProvider extends ChangeNotifier {
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
 
-  LoginProvider({required this.authRepository}) {
+  LoginProvider({required AuthRepository authRepository})
+      : _authRepository = authRepository {
     checkLoginStatus();
   }
 
@@ -22,7 +23,7 @@ class LoginProvider extends ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     _setState(LoginLoadingState());
-    final result = await authRepository.login(email, password);
+    final result = await _authRepository.login(email, password);
     result.fold(
       (failure) => _setState(LoginFailureState(failure.message)),
       (success) {
@@ -34,7 +35,7 @@ class LoginProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     _setState(LoginLoadingState());
-    final result = await authRepository.logout();
+    final result = await _authRepository.logout();
     result.fold(
       (failure) => _setState(LoginFailureState(failure.message)),
       (_) {
@@ -45,7 +46,7 @@ class LoginProvider extends ChangeNotifier {
   }
 
   Future<void> checkLoginStatus() async {
-    _isLoggedIn = await authRepository.isLoggedIn();
+    _isLoggedIn = await _authRepository.isLoggedIn();
     _setState(_isLoggedIn ? LoginSuccessState() : LoginInitialState());
   }
 }

@@ -15,8 +15,8 @@ class MovieDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: getIt<MovieDetailsProvider>()..loadMovieDetails(movieId: movieId),
+    return ChangeNotifierProvider(
+      create: (context) => MovieDetailsProvider(movieRepository: getIt())..loadMovieDetails(movieId: movieId),
       child: Scaffold(
         body: Consumer<MovieDetailsProvider>(
           builder: (context, provider, child) {
