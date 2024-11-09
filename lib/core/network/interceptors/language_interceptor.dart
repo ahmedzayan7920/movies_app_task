@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/features/localization/repos/language_repository.dart';
+import 'package:movies_app_task/core/localization/repos/language_repository.dart';
 
 class LanguageInterceptor extends Interceptor {
   final LanguageRepository _languageRepository;

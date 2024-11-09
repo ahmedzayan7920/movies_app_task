@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui';
 
-import '../../../core/error/failure.dart';
+import '../../error/failure.dart';
 import 'language_repository.dart';
 
 class LanguageRepositoryImpl implements LanguageRepository {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:movies_app_task/features/localization/logic/language_provider.dart';
+import 'package:movies_app_task/core/localization/logic/language_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
 import 'features/auth/logic/login_provider.dart';
 import 'features/auth/ui/views/login_view.dart';
-import 'features/localization/logic/language_state.dart';
+import 'core/localization/logic/language_state.dart';
 import 'features/movies/ui/views/movies_view.dart';
 import 'generated/l10n.dart';
 

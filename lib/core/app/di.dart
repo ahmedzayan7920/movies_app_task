@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/repos/auth_repository.dart';
 import '../../features/auth/repos/auth_repository_impl.dart';
-import '../../features/localization/repos/language_repository.dart';
-import '../../features/localization/repos/language_repository_impl.dart';
+import '../localization/repos/language_repository.dart';
+import '../localization/repos/language_repository_impl.dart';
 import '../../features/movies/repos/movie_repository.dart';
 import '../../features/movies/repos/movie_repository_impl.dart';
 import '../network/dio_client.dart';
