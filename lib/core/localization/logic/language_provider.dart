@@ -17,8 +17,12 @@ class LanguageProvider extends ChangeNotifier {
   void _loadPreferredLanguage() {
     final result = _languageRepository.getPreferredLanguage();
     result.fold(
-      (failure) => _state = LanguageError(failure.message),
-      (locale) => _state = LanguageLoaded(locale),
+      (failure) {
+         _state = LanguageError(failure.message);
+      },
+      (locale) {
+         _state = LanguageLoaded(locale);
+      },
     );
     notifyListeners();
   }

@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
+import 'core/localization/logic/language_state.dart';
 import 'features/auth/logic/login_provider.dart';
 import 'features/auth/ui/views/login_view.dart';
-import 'core/localization/logic/language_state.dart';
 import 'features/movies/ui/views/movies_view.dart';
 import 'generated/l10n.dart';
 
@@ -36,16 +36,19 @@ class MainApp extends StatelessWidget {
         ),
       ],
       child: Consumer<LanguageProvider>(
-        builder: (BuildContext context, LanguageProvider languageProvider, Widget? child) {
+        builder: (BuildContext context, LanguageProvider languageProvider,
+            Widget? child) {
           final state = languageProvider.state;
 
           Locale locale = const Locale('en'); // Default locale
           if (state is LanguageLoaded) {
             locale = state.locale;
+            print(locale); // Log locale for debugging
           } else if (state is LanguageError) {
             print(state.errorMessage); // Log error for debugging
           }
           return MaterialApp(
+            key: ValueKey(locale.languageCode),
             locale: locale,
             localizationsDelegates: const [
               S.delegate,
