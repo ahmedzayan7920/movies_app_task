@@ -28,3 +28,6 @@ class UnexpectedFailure extends Failure {
 class CacheFailure extends Failure {
   CacheFailure({required super.message, super.statusCode});
 }
+class LanguageFailure extends Failure {
+  LanguageFailure({required super.message, super.statusCode});
+}
