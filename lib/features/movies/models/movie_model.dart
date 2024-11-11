@@ -1,4 +1,5 @@
 import '../../../core/utils/app_constants.dart';
+import 'movie_keys.dart';
 
 class MovieModel {
   final bool adult;
@@ -61,57 +62,58 @@ class MovieModel {
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
-      adult: json['adult'],
-      backdropImage: "${AppConstants.baseImageUrl}${json['backdrop_path']}",
-      genreIds: List<int>.from(json['genre_ids'] ?? []),
-      id: json['id'],
-      originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
-      overview: json['overview'],
-      popularity: (json['popularity'] as num).toDouble(),
-      posterImage: "${AppConstants.baseImageUrl}${json['poster_path']}",
-      releaseDate: json['release_date'],
-      title: json['title'],
-      video: json['video'],
-      voteAverage: (json['vote_average'] as num).toDouble(),
-      voteCount: json['vote_count'],
-      belongsToCollection: json['belongs_to_collection'] != null
-          ? BelongsToCollection.fromJson(json['belongs_to_collection'])
+      adult: json[MovieKeys.adult] ?? false,
+      backdropImage:
+          "${AppConstants.baseImageUrl}${json[MovieKeys.backdropPath] ?? ''}",
+      genreIds: List<int>.from(json[MovieKeys.genreIds] ?? []),
+      id: json[MovieKeys.id] ?? 0,
+      originalLanguage: json[MovieKeys.originalLanguage] ?? 'unknown',
+      originalTitle: json[MovieKeys.originalTitle] ?? '',
+      overview: json[MovieKeys.overview] ?? '',
+      popularity: (json[MovieKeys.popularity] as num?)?.toDouble() ?? 0.0,
+      posterImage:
+          "${AppConstants.baseImageUrl}${json[MovieKeys.posterPath] ?? ''}",
+      releaseDate: json[MovieKeys.releaseDate] ?? '',
+      title: json[MovieKeys.title] ?? '',
+      video: json[MovieKeys.video] ?? false,
+      voteAverage: (json[MovieKeys.voteAverage] as num?)?.toDouble() ?? 0.0,
+      voteCount: json[MovieKeys.voteCount] ?? 0,
+      belongsToCollection: json[MovieKeys.belongsToCollection] != null
+          ? BelongsToCollection.fromJson(json[MovieKeys.belongsToCollection])
           : null,
-      budget: json['budget'],
-      genres: json['genres'] != null
-          ? (json['genres'] as List)
+      budget: json[MovieKeys.budget],
+      genres: json[MovieKeys.genres] != null
+          ? (json[MovieKeys.genres] as List)
               .map((genre) => Genre.fromJson(genre))
               .toList()
           : null,
-      homepage: json['homepage'],
-      imdbId: json['imdb_id'],
-      originCountry: json['origin_country'] != null
-          ? List<String>.from(json['origin_country'])
+      homepage: json[MovieKeys.homepage],
+      imdbId: json[MovieKeys.imdbId],
+      originCountry: json[MovieKeys.originCountry] != null
+          ? List<String>.from(json[MovieKeys.originCountry])
           : null,
-      productionCompanies: json['production_companies'] != null
-          ? (json['production_companies'] as List)
+      productionCompanies: json[MovieKeys.productionCompanies] != null
+          ? (json[MovieKeys.productionCompanies] as List)
               .map((company) => ProductionCompany.fromJson(company))
               .toList()
           : null,
-      productionCountries: json['production_countries'] != null
-          ? (json['production_countries'] as List)
+      productionCountries: json[MovieKeys.productionCountries] != null
+          ? (json[MovieKeys.productionCountries] as List)
               .map((country) => ProductionCountry.fromJson(country))
               .toList()
           : null,
-      revenue: json['revenue'],
-      runtime: json['runtime'],
-      spokenLanguages: json['spoken_languages'] != null
-          ? (json['spoken_languages'] as List)
+      revenue: json[MovieKeys.revenue],
+      runtime: json[MovieKeys.runtime],
+      spokenLanguages: json[MovieKeys.spokenLanguages] != null
+          ? (json[MovieKeys.spokenLanguages] as List)
               .map((language) => SpokenLanguage.fromJson(language))
               .toList()
           : null,
-      status: json['status'],
-      tagline: json['tagline'],
+      status: json[MovieKeys.status],
+      tagline: json[MovieKeys.tagline],
     );
   }
 }
-
 
 class BelongsToCollection {
   final int id;
@@ -128,10 +130,10 @@ class BelongsToCollection {
 
   factory BelongsToCollection.fromJson(Map<String, dynamic> json) {
     return BelongsToCollection(
-      id: json['id'],
-      name: json['name'],
-      posterPath: json['poster_path'],
-      backdropPath: json['backdrop_path'],
+      id: json[MovieKeys.collectionId] ?? 0,
+      name: json[MovieKeys.collectionName] ?? '',
+      posterPath: json[MovieKeys.collectionPosterPath],
+      backdropPath: json[MovieKeys.collectionBackdropPath],
     );
   }
 }
@@ -147,8 +149,8 @@ class Genre {
 
   factory Genre.fromJson(Map<String, dynamic> json) {
     return Genre(
-      id: json['id'],
-      name: json['name'],
+      id: json[MovieKeys.genreId] ?? 0,
+      name: json[MovieKeys.genreName] ?? '',
     );
   }
 }
@@ -168,10 +170,10 @@ class ProductionCompany {
 
   factory ProductionCompany.fromJson(Map<String, dynamic> json) {
     return ProductionCompany(
-      id: json['id'],
-      name: json['name'],
-      logoPath: json['logo_path'],
-      originCountry: json['origin_country'],
+      id: json[MovieKeys.companyId] ?? 0,
+      name: json[MovieKeys.companyName] ?? '',
+      logoPath: json[MovieKeys.companyLogoPath],
+      originCountry: json[MovieKeys.companyOriginCountry] ?? '',
     );
   }
 }
@@ -187,8 +189,8 @@ class ProductionCountry {
 
   factory ProductionCountry.fromJson(Map<String, dynamic> json) {
     return ProductionCountry(
-      iso31661: json['iso_3166_1'],
-      name: json['name'],
+      iso31661: json[MovieKeys.countryIsoCode] ?? '',
+      name: json[MovieKeys.countryName] ?? '',
     );
   }
 }
@@ -206,9 +208,9 @@ class SpokenLanguage {
 
   factory SpokenLanguage.fromJson(Map<String, dynamic> json) {
     return SpokenLanguage(
-      iso6391: json['iso_639_1'],
-      name: json['name'],
-      englishName: json['english_name'],
+      iso6391: json[MovieKeys.languageIsoCode] ?? '',
+      name: json[MovieKeys.languageName] ?? '',
+      englishName: json[MovieKeys.languageEnglishName] ?? '',
     );
   }
 }
