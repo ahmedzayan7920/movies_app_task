@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/core/widgets/custom_error_message.dart';
-import 'package:movies_app_task/features/movies/ui/widgets/common/blurred_background_image.dart';
+import '../../../../core/widgets/custom_error_message.dart';
+import '../widgets/common/blurred_background_image.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

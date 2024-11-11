@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/app_strings.dart';
 
 class CustomErrorMessage extends StatelessWidget {
   const CustomErrorMessage({
@@ -17,7 +18,7 @@ class CustomErrorMessage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                '$message\nPull down to refresh.',
+                '$message\n${AppStrings.pullToRefresh}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16,

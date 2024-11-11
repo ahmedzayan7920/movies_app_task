@@ -16,11 +16,11 @@ class PasswordValidator {
   
   static String? validate(String? password) {
     if (password == null || password.isEmpty) return AppStrings.passwordRequired;
-    if (!hasMinLength(password)) return AppStrings.atLeast8Chars;
-    if (!hasLowercase(password)) return AppStrings.oneLowerLetter;
-    if (!hasUppercase(password)) return AppStrings.oneUpperLetter;
-    if (!hasSpecialChar(password)) return AppStrings.oneSpecialChar;
-    if (!hasNumber(password)) return AppStrings.oneNumber;
+    if (!hasMinLength(password)) return AppStrings.passwordMinLength;
+    if (!hasLowercase(password)) return AppStrings.passwordOneLowerCase;
+    if (!hasUppercase(password)) return AppStrings.passwordOneUpperCase;
+    if (!hasSpecialChar(password)) return AppStrings.passwordOneSpecialChar;
+    if (!hasNumber(password)) return AppStrings.passwordOneNumber;
     return null;
   }
 }

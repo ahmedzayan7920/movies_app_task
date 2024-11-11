@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/features/movies/ui/widgets/movies/language_drawer.dart';
+import '../widgets/movies/language_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/app/di.dart';

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import '../utils/app_strings.dart';
 
 import '../error/failure.dart';
 
@@ -8,15 +9,15 @@ Failure handleDioError(DioException error) {
     case DioExceptionType.sendTimeout:
     case DioExceptionType.receiveTimeout:
       return TimeoutFailure(
-          message: 'Request timed out. Please try again later.');
+          message: AppStrings.requestTimeoutError);
 
     case DioExceptionType.connectionError:
       return ConnectionFailure(
-          message: 'Please check your internet connection.');
+          message: AppStrings.checkInternetError);
 
     case DioExceptionType.badResponse:
       final message =
-          error.response?.data?['status_message'] ?? 'Server error occurred.';
+          error.response?.data?['status_message'] ?? AppStrings.serverError;
       return ServerFailure(
         message: message,
         statusCode: error.response?.statusCode,
@@ -24,11 +25,11 @@ Failure handleDioError(DioException error) {
 
     case DioExceptionType.cancel:
       return RequestCancelledFailure(
-          message: 'Request to server was cancelled.');
+          message: AppStrings.requestCancelledError);
 
     default:
       return UnexpectedFailure(
-        message: error.message ?? 'An unexpected error occurred.',
+        message: error.message ?? AppStrings.unexpectedServerError,
         statusCode: error.response?.statusCode,
       );
   }

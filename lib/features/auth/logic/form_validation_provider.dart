@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/core/utils/app_keys.dart';
+import '../../../core/utils/app_keys.dart';
 
 import '../../../core/utils/email_validator.dart';
 import '../../../core/utils/password_validator.dart';

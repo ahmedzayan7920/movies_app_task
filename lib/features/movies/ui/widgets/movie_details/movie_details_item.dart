@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/features/movies/models/movie_model.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../models/movie_model.dart';
 import '../common/movie_overview.dart';
 import '../common/movie_poster_image.dart';
 import '../common/movie_title.dart';
@@ -55,19 +56,19 @@ class MovieDetailsItem extends StatelessWidget {
             MovieOverview(overview: movieDetails.overview),
             const SizedBox(height: 10),
             MovieRichText(
-              title: "Release Date: ",
+              title: AppStrings.releaseDate,
               value: movieDetails.releaseDate,
             ),
             MovieRichText(
-              title: "Countries: ",
+              title: AppStrings.countries,
               value: (movieDetails.productionCountries?.map((e) => e.name).join(', ')) ?? 'N/A',
             ),
             MovieRichText(
-              title: "Languages: ",
+              title: AppStrings.languages,
               value: movieDetails.spokenLanguages?.map((e) => e.name).join(', ') ?? 'N/A',
             ),
             MovieRichText(
-              title: "Companies: ",
+              title: AppStrings.companies,
               value: movieDetails.productionCompanies
               ?.map((e) => e.name)
               .join(', ') ?? 'N/A',

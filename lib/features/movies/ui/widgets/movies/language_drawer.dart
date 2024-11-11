@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/utils/app_keys.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/localization/logic/language_provider.dart';
 import '../../../../../core/localization/logic/language_state.dart';
+import '../../../../../core/utils/app_strings.dart';
 
 class LanguageDrawer extends StatelessWidget {
   const LanguageDrawer({super.key});
@@ -12,7 +14,6 @@ class LanguageDrawer extends StatelessWidget {
     final languageProvider = Provider.of<LanguageProvider>(context);
     final state = languageProvider.state;
 
-    // Get the currently selected language code
     String? selectedLanguageCode;
     if (state is LanguageLoaded) {
       selectedLanguageCode = state.locale.languageCode;
@@ -22,16 +23,16 @@ class LanguageDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            child: Text('Settings',
-                style: TextStyle(color: Colors.white, fontSize: 24)),
+          DrawerHeader(
+            child: Text(AppStrings.settingsTitle,
+                style: const TextStyle(color: Colors.white, fontSize: 24)),
           ),
-          const ListTile(
-            title: Text('Language'),
+          ListTile(
+            title: Text(AppStrings.languageTitle),
           ),
           ...languageProvider.supportedLanguages.map((language) {
-            final languageCode = language['code']!;
-            final languageLabel = language['label']!;
+            final languageCode = language[AppKeys.languageCode]!;
+            final languageLabel = language[AppKeys.languageLabel]!;
 
             return RadioListTile<String>(
               title: Text(languageLabel),
@@ -40,7 +41,7 @@ class LanguageDrawer extends StatelessWidget {
               onChanged: (newLanguageCode) {
                 if (newLanguageCode != null) {
                   languageProvider.changeLanguage(newLanguageCode);
-                  Navigator.pop(context); // Close drawer after selection
+                  Navigator.pop(context);
                 }
               },
             );

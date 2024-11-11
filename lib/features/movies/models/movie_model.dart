@@ -1,3 +1,5 @@
+import '../../../core/utils/app_constants.dart';
+
 class MovieModel {
   final bool adult;
   final String backdropImage;
@@ -60,14 +62,14 @@ class MovieModel {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       adult: json['adult'],
-      backdropImage: "https://image.tmdb.org/t/p/w200${json['backdrop_path']}",
+      backdropImage: "${AppConstants.baseImageUrl}${json['backdrop_path']}",
       genreIds: List<int>.from(json['genre_ids'] ?? []),
       id: json['id'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],
       popularity: (json['popularity'] as num).toDouble(),
-      posterImage: "https://image.tmdb.org/t/p/w200${json['poster_path']}",
+      posterImage: "${AppConstants.baseImageUrl}${json['poster_path']}",
       releaseDate: json['release_date'],
       title: json['title'],
       video: json['video'],
@@ -110,7 +112,6 @@ class MovieModel {
   }
 }
 
-// Supporting models for complex types within MovieModel
 
 class BelongsToCollection {
   final int id;

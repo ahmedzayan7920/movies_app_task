@@ -1,13 +1,15 @@
-import 'package:dartz/dartz.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui';
+
+import 'package:dartz/dartz.dart';
+import '../../utils/app_keys.dart';
+import '../../utils/app_strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../error/failure.dart';
 import 'language_repository.dart';
 
 class LanguageRepositoryImpl implements LanguageRepository {
   final SharedPreferences _sharedPreferences;
-  static const String _languageCodeKey = 'languageCode';
 
   LanguageRepositoryImpl({required SharedPreferences sharedPreferences})
       : _sharedPreferences = sharedPreferences;
@@ -15,7 +17,7 @@ class LanguageRepositoryImpl implements LanguageRepository {
   @override
   Either<Failure, Locale> getPreferredLanguage() {
     try {
-      final languageCode = _sharedPreferences.getString(_languageCodeKey);
+      final languageCode = _sharedPreferences.getString(AppKeys.languageCode);
 
       if (languageCode != null) {
         return Right(Locale(languageCode));
@@ -24,18 +26,18 @@ class LanguageRepositoryImpl implements LanguageRepository {
       }
     } catch (e) {
       return Left(
-          LanguageFailure(message: "Failed to load preferred language"));
+          LanguageFailure(message: AppStrings.loadLanguageError));
     }
   }
 
   @override
   Future<Either<Failure, Unit>> saveLanguage(String languageCode) async {
     try {
-      await _sharedPreferences.setString(_languageCodeKey, languageCode);
+      await _sharedPreferences.setString(AppKeys.languageCode, languageCode);
       return const Right(unit);
     } catch (e) {
       return Left(
-          LanguageFailure(message: "Failed to save preferred language"));
+          LanguageFailure(message: AppStrings.saveLanguageError));
     }
   }
 }

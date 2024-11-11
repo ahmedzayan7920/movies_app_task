@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:movies_app_task/core/localization/logic/language_provider.dart';
+import 'core/localization/logic/language_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app/app_router.dart';

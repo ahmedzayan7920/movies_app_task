@@ -1,8 +1,8 @@
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:get_it/get_it.dart';
-import 'package:movies_app_task/core/network/dio_cache_config.dart';
-import 'package:movies_app_task/core/network/interceptors/auth_interceptor.dart';
-import 'package:movies_app_task/core/network/interceptors/response_interceptor.dart';
+import '../network/dio_cache_config.dart';
+import '../network/interceptors/auth_interceptor.dart';
+import '../network/interceptors/response_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/repos/auth_repository.dart';

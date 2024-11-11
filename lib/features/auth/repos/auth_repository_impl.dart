@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:movies_app_task/core/utils/app_constants.dart';
-import 'package:movies_app_task/core/utils/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/error/failure.dart';
+import '../../../core/utils/app_constants.dart';
 import '../../../core/utils/app_keys.dart';
+import '../../../core/utils/app_strings.dart';
 import 'auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

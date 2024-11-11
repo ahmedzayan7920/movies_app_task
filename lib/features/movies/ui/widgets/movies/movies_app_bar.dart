@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/app/app_routes.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../../../auth/logic/login_provider.dart';
 import '../../../../auth/logic/login_state.dart';
 
@@ -23,9 +24,9 @@ class MoviesAppBar extends StatelessWidget {
                     Scaffold.of(context).openDrawer();
                   },
             child: const Icon(Icons.menu_outlined)),
-        const Text(
-          'Popular Movies',
-          style: TextStyle(
+        Text(
+          AppStrings.popularMoviesTitle,
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),

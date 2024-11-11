@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/core/utils/app_keys.dart';
-import 'package:movies_app_task/core/utils/app_strings.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/utils/app_keys.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../logic/form_validation_provider.dart';
 import '../../logic/form_validation_state.dart';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_strings.dart';
 
+import '../../utils/app_keys.dart';
 import '../repos/language_repository.dart';
 import 'language_state.dart';
 
@@ -12,8 +14,8 @@ class LanguageProvider extends ChangeNotifier {
     _loadPreferredLanguage();
   }
   final List<Map<String, String>> supportedLanguages = [
-    {'code': 'en', 'label': 'English'},
-    {'code': 'ar', 'label': 'Arabic'},
+    {AppKeys.languageCode: 'en', AppKeys.languageLabel: AppStrings.englishLanguage},
+    {AppKeys.languageCode: 'ar', AppKeys.languageLabel: AppStrings.arabicLanguage},
   ];
 
   LanguageState get state => _state;
@@ -22,10 +24,10 @@ class LanguageProvider extends ChangeNotifier {
     final result = _languageRepository.getPreferredLanguage();
     result.fold(
       (failure) {
-         _state = LanguageError(failure.message);
+        _state = LanguageError(failure.message);
       },
       (locale) {
-         _state = LanguageLoaded(locale);
+        _state = LanguageLoaded(locale);
       },
     );
     notifyListeners();

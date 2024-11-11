@@ -22,28 +22,58 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "emailFieldHint": MessageLookupByLibrary.simpleMessage("Email"),
+        "arabicLanguage": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "checkInternetError": MessageLookupByLibrary.simpleMessage(
+            "Please check your internet connection."),
+        "companies": MessageLookupByLibrary.simpleMessage("Companies: "),
+        "countries": MessageLookupByLibrary.simpleMessage("Countries: "),
+        "emailHint": MessageLookupByLibrary.simpleMessage("Email"),
         "emailInvalid":
             MessageLookupByLibrary.simpleMessage("Enter a valid email"),
         "emailRequired":
             MessageLookupByLibrary.simpleMessage("Email is required"),
-        "errorInvalidCredentials":
+        "englishLanguage": MessageLookupByLibrary.simpleMessage("English"),
+        "expectedListError":
+            MessageLookupByLibrary.simpleMessage("Expected a List but got "),
+        "expectedMapError":
+            MessageLookupByLibrary.simpleMessage("Expected Map but got "),
+        "invalidCredentials":
             MessageLookupByLibrary.simpleMessage("Invalid credentials"),
+        "languageTitle": MessageLookupByLibrary.simpleMessage("Language"),
+        "languages": MessageLookupByLibrary.simpleMessage("Languages: "),
+        "loadLanguageError": MessageLookupByLibrary.simpleMessage(
+            "Failed to load preferred language"),
         "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
-        "passwordFieldHint": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordHint": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordMinLength": MessageLookupByLibrary.simpleMessage(
+            "Must be at least 8 characters"),
+        "passwordOneLowerCase": MessageLookupByLibrary.simpleMessage(
+            "Must contain a lowercase letter"),
+        "passwordOneNumber": MessageLookupByLibrary.simpleMessage(
+            "Must contain at least one number"),
+        "passwordOneSpecialChar": MessageLookupByLibrary.simpleMessage(
+            "Must contain a special character"),
+        "passwordOneUpperCase": MessageLookupByLibrary.simpleMessage(
+            "Must contain an uppercase letter"),
         "passwordRequired":
             MessageLookupByLibrary.simpleMessage("Password is required"),
-        "passwordRequirementAtLeast8Chars":
-            MessageLookupByLibrary.simpleMessage(
-                "Must be at least 8 characters"),
-        "passwordRequirementOneLowerCase": MessageLookupByLibrary.simpleMessage(
-            "Must contain a lowercase letter"),
-        "passwordRequirementOneNumber": MessageLookupByLibrary.simpleMessage(
-            "Must contain at least one number"),
-        "passwordRequirementOneSpecialChar":
-            MessageLookupByLibrary.simpleMessage(
-                "Must contain a special character"),
-        "passwordRequirementOneUpperCase": MessageLookupByLibrary.simpleMessage(
-            "Must contain an uppercase letter")
+        "popularMoviesTitle":
+            MessageLookupByLibrary.simpleMessage("Popular Movies"),
+        "pullToRefresh":
+            MessageLookupByLibrary.simpleMessage("Pull down to refresh."),
+        "releaseDate": MessageLookupByLibrary.simpleMessage("Release Date: "),
+        "requestCancelledError": MessageLookupByLibrary.simpleMessage(
+            "Request to server was cancelled."),
+        "requestTimeoutError": MessageLookupByLibrary.simpleMessage(
+            "Request timed out. Please try again later."),
+        "saveLanguageError": MessageLookupByLibrary.simpleMessage(
+            "Failed to save preferred language"),
+        "serverError":
+            MessageLookupByLibrary.simpleMessage("Server error occurred."),
+        "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+        "unexpectedError":
+            MessageLookupByLibrary.simpleMessage("Unexpected error: "),
+        "unexpectedServerError": MessageLookupByLibrary.simpleMessage(
+            "An unexpected error occurred.")
       };
 }

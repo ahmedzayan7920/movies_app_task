@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app_task/core/utils/app_strings.dart';
+import '../utils/app_strings.dart';
 
 import '../utils/password_validator.dart';
 
@@ -49,23 +49,23 @@ class _PasswordValidationIndicatorState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _ValidationItem(
-                  label: AppStrings.atLeast8Chars,
+                  label: AppStrings.passwordMinLength,
                   isValid: PasswordValidator.hasMinLength(widget.password),
                 ),
                 _ValidationItem(
-                  label: AppStrings.oneLowerLetter,
+                  label: AppStrings.passwordOneLowerCase,
                   isValid: PasswordValidator.hasLowercase(widget.password),
                 ),
                 _ValidationItem(
-                  label: AppStrings.oneUpperLetter,
+                  label: AppStrings.passwordOneUpperCase,
                   isValid: PasswordValidator.hasUppercase(widget.password),
                 ),
                 _ValidationItem(
-                  label: AppStrings.oneSpecialChar,
+                  label: AppStrings.passwordOneSpecialChar,
                   isValid: PasswordValidator.hasSpecialChar(widget.password),
                 ),
                 _ValidationItem(
-                  label: AppStrings.oneNumber,
+                  label: AppStrings.passwordOneNumber,
                   isValid: PasswordValidator.hasNumber(widget.password),
                 ),
               ],

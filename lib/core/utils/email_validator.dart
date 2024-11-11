@@ -1,4 +1,4 @@
-import 'package:movies_app_task/core/utils/app_strings.dart';
+import 'app_strings.dart';
 
 class EmailValidator {
   static final RegExp _emailRegExp = RegExp(
