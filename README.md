@@ -5,6 +5,15 @@ A cross-platform Flutter app for browsing popular movies, built with MVVM archit
 ## 📲 Demo Video
 [Demo Video](https://github.com/user-attachments/assets/6cdad91f-9f43-4b0b-8ff6-a68573e7f3f3)
 
+## 🔑 Mock Login Credentials
+
+To log into the app, use these **test credentials**:
+
+- **Email**: `ahmed@gmail.com`
+- **Password**: `Ahmed@123`
+
+> **Note:** These credentials are required for accessing the app's main features.
+
 ## 📥 Download the APK
 Download the latest version of the app [here](https://drive.google.com/file/d/17pa3FIAtvrds0hPyetuXFmE5epV0KAee/view?usp=sharing)
 
