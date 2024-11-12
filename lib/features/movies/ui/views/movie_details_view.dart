@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/custom_error_message.dart';
+import '../widgets/common/blurred_background_image.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -13,25 +15,36 @@ class MovieDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: getIt<MovieDetailsProvider>()..loadMovieDetails(movieId: movieId),
+    return ChangeNotifierProvider(
+      create: (context) => MovieDetailsProvider(movieRepository: getIt())..loadMovieDetails(movieId: movieId),
       child: Scaffold(
         body: Consumer<MovieDetailsProvider>(
           builder: (context, provider, child) {
             final state = provider.state;
-            switch (state) {
-              case MovieDetailsLoadingState():
-                return Skeletonizer(
-                  enabled: true,
-                  child: MovieDetailsItem(
-                    movieDetails: provider.fakeMovieDetails,
-                  ),
-                );
-              case MovieDetailsLoadedState(:final movieDetails):
-                return MovieDetailsItem(movieDetails: movieDetails);
-              case MovieDetailsErrorState(:final message):
-                return Center(child: Text('Error: $message'));
-            }
+            return RefreshIndicator(
+              onRefresh: () => provider.loadMovieDetails(movieId: movieId),
+              child: Builder(
+                builder: (context) {
+                  switch (state) {
+                    case MovieDetailsLoadingState():
+                      return Skeletonizer(
+                        enabled: true,
+                        child: MovieDetailsItem(
+                          movieDetails: provider.fakeMovieDetails,
+                        ),
+                      );
+                    case MovieDetailsLoadedState(:final movieDetails):
+                      return MovieDetailsItem(movieDetails: movieDetails);
+                    case MovieDetailsErrorState(:final message):
+                      return BlurredBackgroundImage(
+                        imageUrl: '',
+                        withBackArrow: true,
+                        child: CustomErrorMessage(message: message),
+                      );
+                  }
+                },
+              ),
+            );
           },
         ),
       ),

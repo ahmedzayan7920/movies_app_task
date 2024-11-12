@@ -10,14 +10,24 @@ class ServerFailure extends Failure {
 }
 
 class ConnectionFailure extends Failure {
-  ConnectionFailure() : super(message: 'No internet connection');
+  ConnectionFailure({required super.message});
 }
 
 class TimeoutFailure extends Failure {
-  TimeoutFailure() : super(message: 'Connection timeout');
+  TimeoutFailure({required super.message});
 }
 
+class RequestCancelledFailure extends Failure {
+  RequestCancelledFailure({required super.message});
+}
+
+class UnexpectedFailure extends Failure {
+  UnexpectedFailure({required super.message, super.statusCode});
+}
 
 class CacheFailure extends Failure {
   CacheFailure({required super.message, super.statusCode});
+}
+class LanguageFailure extends Failure {
+  LanguageFailure({required super.message, super.statusCode});
 }

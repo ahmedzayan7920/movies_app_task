@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/app/app_routes.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../logic/form_validation_provider.dart';
 import '../../logic/form_validation_state.dart';
@@ -19,7 +20,7 @@ class LoginButton extends StatelessWidget {
         return CustomElevatedButton(
           onPressed: isLoading ? null : () => _login(context),
           isLoading: isLoading,
-          text: "Login",
+          text: AppStrings.loginButton,
         );
       },
     );
@@ -48,6 +49,8 @@ class LoginButton extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text((loginProvider.state as LoginFailureState).message),
+          showCloseIcon: true,
+          behavior: SnackBarBehavior.floating,
         ),
       );
     }

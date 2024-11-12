@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/app/di.dart';
+import '../widgets/movies/language_drawer.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/app/di.dart';
 import '../../logic/movies/movies_provider.dart';
 import '../widgets/movies/movies_app_bar.dart';
 import '../widgets/movies/movies_body.dart';
@@ -11,8 +12,9 @@ class MoviesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: getIt<MoviesProvider>()..loadPopularMovies(),
+    return ChangeNotifierProvider(
+      create: (BuildContext context) =>
+          MoviesProvider(movieRepository: getIt()),
       child: const Scaffold(
         body: SafeArea(
           child: Padding(
@@ -28,6 +30,7 @@ class MoviesView extends StatelessWidget {
             ),
           ),
         ),
+        drawer: LanguageDrawer(),
       ),
     );
   }

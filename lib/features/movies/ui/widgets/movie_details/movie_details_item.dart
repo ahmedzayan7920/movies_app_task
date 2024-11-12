@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../models/movie_details_model.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../models/movie_model.dart';
 import '../common/movie_overview.dart';
 import '../common/movie_poster_image.dart';
 import '../common/movie_title.dart';
@@ -11,7 +12,7 @@ import 'movie_rich_text.dart';
 
 class MovieDetailsItem extends StatelessWidget {
   const MovieDetailsItem({super.key, required this.movieDetails});
-  final MovieDetailsModel movieDetails;
+  final MovieModel movieDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -49,30 +50,28 @@ class MovieDetailsItem extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Center(
-              child: MovieGenres(genres: movieDetails.genres),
+              child: MovieGenres(genres: movieDetails.genres??[]),
             ),
             const SizedBox(height: 10),
             MovieOverview(overview: movieDetails.overview),
             const SizedBox(height: 10),
             MovieRichText(
-              title: "Release Date: ",
+              title: AppStrings.releaseDate,
               value: movieDetails.releaseDate,
             ),
             MovieRichText(
-              title: "Countries: ",
-              value: movieDetails.productionCountries
-                  .map((e) => e.name)
-                  .join(', '),
+              title: AppStrings.countries,
+              value: (movieDetails.productionCountries?.map((e) => e.name).join(', ')) ?? 'N/A',
             ),
             MovieRichText(
-              title: "Languages: ",
-              value: movieDetails.spokenLanguages.map((e) => e.name).join(', '),
+              title: AppStrings.languages,
+              value: movieDetails.spokenLanguages?.map((e) => e.name).join(', ') ?? 'N/A',
             ),
             MovieRichText(
-              title: "Companies: ",
+              title: AppStrings.companies,
               value: movieDetails.productionCompanies
-                  .map((e) => e.name)
-                  .join(', '),
+              ?.map((e) => e.name)
+              .join(', ') ?? 'N/A',
             ),
           ],
         ),

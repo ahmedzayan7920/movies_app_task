@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/movie_details_model.dart';
+import '../../../models/movie_model.dart';
 
 class MovieGenres extends StatelessWidget {
   const MovieGenres({

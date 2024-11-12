@@ -1,0 +1,44 @@
+{
+    "emailHint": "Email",
+    "passwordHint": "Password",
+    
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter a valid email",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Must be at least 8 characters",
+    "passwordOneLowerCase": "Must contain a lowercase letter",
+    "passwordOneUpperCase": "Must contain an uppercase letter",
+    "passwordOneSpecialChar": "Must contain a special character",
+    "passwordOneNumber": "Must contain at least one number",
+    
+    "loginButton": "Login",
+    "invalidCredentials": "Invalid credentials",
+
+    "englishLanguage": "English",
+    "arabicLanguage": "Arabic",
+
+    "loadLanguageError": "Failed to load preferred language",
+    "saveLanguageError": "Failed to save preferred language",
+
+    "unexpectedError": "Unexpected error: ",
+    "expectedListError": "Expected a List but got ",
+    "expectedMapError": "Expected Map but got ",
+
+    "requestTimeoutError": "Request timed out. Please try again later.",
+    "checkInternetError": "Please check your internet connection.",
+    "serverError": "Server error occurred.",
+    "requestCancelledError": "Request to server was cancelled.",
+    "unexpectedServerError": "An unexpected error occurred.",
+
+    "pullToRefresh": "Pull down to refresh.",
+
+    "releaseDate": "Release Date: ",
+    "countries": "Countries: ",
+    "languages": "Languages: ",
+    "companies": "Companies: ",
+
+    "settingsTitle": "Settings",
+    "languageTitle": "Language",
+
+    "popularMoviesTitle": "Popular Movies"
+}

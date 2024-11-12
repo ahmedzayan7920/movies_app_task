@@ -1,0 +1,44 @@
+{
+    "emailHint": "البريد الإلكتروني",
+    "passwordHint": "كلمة المرور",
+    
+    "emailRequired": "يرجى إدخال البريد الإلكتروني",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+    "passwordRequired": "يرجى إدخال كلمة المرور",
+    "passwordMinLength": "يجب أن تحتوي على ثمانية أحرف على الأقل",
+    "passwordOneLowerCase": "يجب أن تحتوي على حرف صغير",
+    "passwordOneUpperCase": "يجب أن تحتوي على حرف كبير",
+    "passwordOneSpecialChar": "يجب أن تحتوي على حرف خاص",
+    "passwordOneNumber": "يجب أن تحتوي على رقم واحد على الأقل",
+    
+    "loginButton": "تسجيل الدخول",
+    "invalidCredentials": "بيانات تسجيل الدخول غير صالحة",
+
+    "englishLanguage": "الإنجليزية",
+    "arabicLanguage": "العربية",
+
+    "loadLanguageError": "فشل في تحميل اللغة المفضلة",
+    "saveLanguageError": "فشل في حفظ اللغة المفضلة",
+
+    "unexpectedError": "خطأ غير متوقع: ",
+    "expectedListError": "تم توقع قائمة ولكن تم الحصول على ",
+    "expectedMapError": "تم توقع خريطة ولكن تم الحصول على ",
+
+    "requestTimeoutError": "انتهت مهلة الطلب. يرجى المحاولة لاحقاً.",
+    "checkInternetError": "يرجى التحقق من اتصال الإنترنت.",
+    "serverError": "حدث خطأ في الخادم.",
+    "requestCancelledError": "تم إلغاء الطلب إلى الخادم.",
+    "unexpectedServerError": "حدث خطأ غير متوقع.",
+
+    "pullToRefresh": "اسحب للأسفل للتحديث.",
+
+    "releaseDate": "تاريخ الإصدار: ",
+    "countries": "البلدان: ",
+    "languages": "اللغات: ",
+    "companies": "الشركات: ",
+
+    "settingsTitle": "الإعدادات",
+    "languageTitle": "اللغة",
+
+    "popularMoviesTitle": "الأفلام الشهيرة"
+}

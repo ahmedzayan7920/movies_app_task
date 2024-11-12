@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../auth/logic/login_provider.dart';
-import '../../../../auth/logic/login_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/app/app_routes.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../auth/logic/login_provider.dart';
+import '../../../../auth/logic/login_state.dart';
 
 class MoviesAppBar extends StatelessWidget {
   const MoviesAppBar({
@@ -16,9 +17,16 @@ class MoviesAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Popular Movies',
-          style: TextStyle(
+        GestureDetector(
+            onTap: loginProvider.state is LoginLoadingState
+                ? null
+                : () {
+                    Scaffold.of(context).openDrawer();
+                  },
+            child: const Icon(Icons.menu_outlined)),
+        Text(
+          AppStrings.popularMoviesTitle,
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
