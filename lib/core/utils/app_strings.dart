@@ -43,4 +43,6 @@ abstract class AppStrings {
   static String get languageTitle => S.current.languageTitle;
 
   static String get popularMoviesTitle => S.current.popularMoviesTitle;
+
+  static String get fetchNextPageError => S.current.fetchNextPageError;
 }

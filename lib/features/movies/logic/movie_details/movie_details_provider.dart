@@ -14,7 +14,6 @@ class MovieDetailsProvider extends ChangeNotifier {
   MovieDetailsProvider({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
 
-
   Future<void> loadMovieDetails({required int movieId}) async {
     _state = MovieDetailsLoadingState();
     notifyListeners();
@@ -23,8 +22,8 @@ class MovieDetailsProvider extends ChangeNotifier {
       (failure) {
         _state = MovieDetailsErrorState(failure.message);
       },
-      (movieDetails) {
-        _state = MovieDetailsLoadedState(movieDetails);
+      (movieDetailsResource) {
+        _state = MovieDetailsLoadedState(movieDetailsResource.data);
       },
     );
     notifyListeners();

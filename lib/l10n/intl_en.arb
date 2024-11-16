@@ -40,5 +40,6 @@
     "settingsTitle": "Settings",
     "languageTitle": "Language",
 
-    "popularMoviesTitle": "Popular Movies"
+    "popularMoviesTitle": "Popular Movies",
+    "fetchNextPageError": "Unable to fetch the next page. Please try again later."
 }

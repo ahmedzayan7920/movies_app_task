@@ -16,7 +16,7 @@ class MoviesBody extends StatelessWidget {
       builder: (context, provider, child) {
         final state = provider.state;
         return RefreshIndicator(
-          onRefresh: provider.loadPopularMovies,
+          onRefresh: () => provider.loadPopularMovies(),
           child: Builder(
             builder: (context) {
               switch (state) {
@@ -25,8 +25,30 @@ class MoviesBody extends StatelessWidget {
                     enabled: true,
                     child: MoviesListView(movies: provider.fakeMovies),
                   );
-                case MoviesLoadedState(:final movies):
-                  return MoviesListView(movies: movies);
+                case MoviesLoadedState(
+                    :final moviesResource,
+                    :final isLoadingMore,
+                    :final error
+                  ):
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: MoviesListView(
+                          movies: moviesResource.data,
+                          isLoadingMore: isLoadingMore,
+                          onLoadMore: provider.loadMoreMovies,
+                        ),
+                      ),
+                      if (error != null)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            error,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                    ],
+                  );
                 case MoviesErrorState(:final message):
                   return CustomErrorMessage(message: message);
               }
@@ -37,4 +59,3 @@ class MoviesBody extends StatelessWidget {
     );
   }
 }
-
