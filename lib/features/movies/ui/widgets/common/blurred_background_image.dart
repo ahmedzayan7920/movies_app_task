@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../../core/themes/app_colors.dart';
+
 class BlurredBackgroundImage extends StatelessWidget {
   const BlurredBackgroundImage({
     super.key,
@@ -32,7 +34,7 @@ class BlurredBackgroundImage extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
             child: Container(
-              color: Colors.black.withOpacity(0.6),
+              color: AppColors.black.withOpacity(0.6),
             ),
           ),
         ),
@@ -50,7 +52,7 @@ class BlurredBackgroundImage extends StatelessWidget {
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () => Navigator.of(context).pop(),
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
                   ),
                 ),

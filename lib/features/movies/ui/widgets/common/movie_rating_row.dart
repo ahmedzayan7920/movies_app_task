@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../../../core/themes/app_colors.dart';
 
 class MovieRatingRow extends StatelessWidget {
   const MovieRatingRow({
@@ -19,22 +20,21 @@ class MovieRatingRow extends StatelessWidget {
         Skeleton.shade(
           child: Icon(
             Icons.star_rounded,
-            color: Colors.yellow[800],
+            color: AppColors.yellow,
           ),
         ),
         Text(
           voteAverage.toStringAsFixed(1),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(width: 5),
         Text(
           '($voteCount)',
-          style: TextStyle(
-            color: Colors.grey[350],
-          ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.greyLight,
+              ),
         ),
       ],
     );

@@ -20,9 +20,7 @@ class CustomErrorMessage extends StatelessWidget {
               child: Text(
                 '$message\n${AppStrings.pullToRefresh}',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ),

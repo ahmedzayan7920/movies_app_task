@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/themes/app_colors.dart';
 import '../utils/app_strings.dart';
 
 import '../utils/password_validator.dart';
@@ -37,7 +38,7 @@ class _PasswordValidationIndicatorState
               ),
               Icon(
                 _isExpanded ? Icons.expand_less : Icons.expand_more,
-                color: Colors.grey,
+                color: AppColors.grey,
               ),
             ],
           ),
@@ -97,8 +98,8 @@ class _ProgressBar extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: LinearProgressIndicator(
         value: progress,
-        backgroundColor: Colors.red.shade300,
-        color: Colors.green,
+        backgroundColor: AppColors.redLight,
+        color: AppColors.green,
         minHeight: 6,
       ),
     );
@@ -122,16 +123,15 @@ class _ValidationItem extends StatelessWidget {
         children: [
           Icon(
             isValid ? Icons.check_circle : Icons.radio_button_unchecked,
-            color: isValid ? Colors.green : Colors.grey,
+            color: isValid ? AppColors.green : AppColors.grey,
             size: 20,
           ),
           const SizedBox(width: 8),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 14,
-              color: isValid ? Colors.green : Colors.grey,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: isValid ? AppColors.green : AppColors.grey,
+                ),
           ),
         ],
       ),

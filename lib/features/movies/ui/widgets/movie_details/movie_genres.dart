@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/themes/app_colors.dart';
 
 import '../../../models/movie_model.dart';
 
@@ -15,8 +16,8 @@ class MovieGenres extends StatelessWidget {
     return Text(
       genres.map((e) => e.name).join(' | '),
       textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.grey[350],
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: AppColors.greyLight,
       ),
     );
   }
