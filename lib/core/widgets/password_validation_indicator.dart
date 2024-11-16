@@ -5,8 +5,8 @@ import '../utils/app_strings.dart';
 import '../utils/password_validator.dart';
 
 class PasswordValidationIndicator extends StatefulWidget {
-  const PasswordValidationIndicator({super.key, required this.password});
-  final String password;
+  const PasswordValidationIndicator({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   State<PasswordValidationIndicator> createState() =>
@@ -15,6 +15,29 @@ class PasswordValidationIndicator extends StatefulWidget {
 
 class _PasswordValidationIndicatorState
     extends State<PasswordValidationIndicator> {
+      late String password;
+
+  @override
+  void initState() {
+    super.initState();
+    password = widget.controller.text;
+    widget.controller.addListener(_updatePassword);
+  }
+
+  void _updatePassword() {
+    setState(() {
+      password = widget.controller.text;
+    });
+  }
+
+  @override
+  @override
+  void dispose() {
+    widget.controller.removeListener(_updatePassword);
+    super.dispose();
+  }
+
+
   bool _isExpanded = false;
 
   void _toggleExpanded() {
@@ -34,7 +57,7 @@ class _PasswordValidationIndicatorState
             children: [
               Expanded(
                 child:
-                    _ProgressBar(progress: _calculateProgress(widget.password)),
+                    _ProgressBar(progress: _calculateProgress(password)),
               ),
               Icon(
                 _isExpanded ? Icons.expand_less : Icons.expand_more,
@@ -51,23 +74,23 @@ class _PasswordValidationIndicatorState
               children: [
                 _ValidationItem(
                   label: AppStrings.passwordMinLength,
-                  isValid: PasswordValidator.hasMinLength(widget.password),
+                  isValid: PasswordValidator.hasMinLength(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneLowerCase,
-                  isValid: PasswordValidator.hasLowercase(widget.password),
+                  isValid: PasswordValidator.hasLowercase(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneUpperCase,
-                  isValid: PasswordValidator.hasUppercase(widget.password),
+                  isValid: PasswordValidator.hasUppercase(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneSpecialChar,
-                  isValid: PasswordValidator.hasSpecialChar(widget.password),
+                  isValid: PasswordValidator.hasSpecialChar(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneNumber,
-                  isValid: PasswordValidator.hasNumber(widget.password),
+                  isValid: PasswordValidator.hasNumber(password),
                 ),
               ],
             ),

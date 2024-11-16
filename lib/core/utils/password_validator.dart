@@ -1,6 +1,6 @@
 import 'app_strings.dart';
 
-class PasswordValidator {
+abstract class PasswordValidator {
   static const int minLength = 8;
   
   static final RegExp _lowercaseRegExp = RegExp(r'[a-z]');
