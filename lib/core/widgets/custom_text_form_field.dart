@@ -9,7 +9,6 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final String? errorText;
-  final ValueChanged<String> onChanged;
   final bool isPassword;
   final bool readOnly;
   final TextEditingController? controller;
@@ -21,7 +20,6 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.prefixIcon,
-    required this.onChanged,
     this.suffixIcon,
     this.onSuffixIconPressed,
     this.obscureText = false,
@@ -44,7 +42,6 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       obscureText: obscureText,
-      onChanged: onChanged,
       readOnly: readOnly,
       validator: validator,
       onTap: onTap,

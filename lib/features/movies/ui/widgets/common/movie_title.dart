@@ -15,11 +15,7 @@ class MovieTitle extends StatelessWidget {
       title,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
+      style: Theme.of(context).textTheme.titleLarge,
     );
   }
 }

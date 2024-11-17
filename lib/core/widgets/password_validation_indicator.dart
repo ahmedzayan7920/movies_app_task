@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/themes/app_colors.dart';
 import '../utils/app_strings.dart';
 
 import '../utils/password_validator.dart';
 
 class PasswordValidationIndicator extends StatefulWidget {
-  const PasswordValidationIndicator({super.key, required this.password});
-  final String password;
+  const PasswordValidationIndicator({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   State<PasswordValidationIndicator> createState() =>
@@ -14,6 +15,29 @@ class PasswordValidationIndicator extends StatefulWidget {
 
 class _PasswordValidationIndicatorState
     extends State<PasswordValidationIndicator> {
+      late String password;
+
+  @override
+  void initState() {
+    super.initState();
+    password = widget.controller.text;
+    widget.controller.addListener(_updatePassword);
+  }
+
+  void _updatePassword() {
+    setState(() {
+      password = widget.controller.text;
+    });
+  }
+
+  @override
+  @override
+  void dispose() {
+    widget.controller.removeListener(_updatePassword);
+    super.dispose();
+  }
+
+
   bool _isExpanded = false;
 
   void _toggleExpanded() {
@@ -33,11 +57,11 @@ class _PasswordValidationIndicatorState
             children: [
               Expanded(
                 child:
-                    _ProgressBar(progress: _calculateProgress(widget.password)),
+                    _ProgressBar(progress: _calculateProgress(password)),
               ),
               Icon(
                 _isExpanded ? Icons.expand_less : Icons.expand_more,
-                color: Colors.grey,
+                color: AppColors.grey,
               ),
             ],
           ),
@@ -50,23 +74,23 @@ class _PasswordValidationIndicatorState
               children: [
                 _ValidationItem(
                   label: AppStrings.passwordMinLength,
-                  isValid: PasswordValidator.hasMinLength(widget.password),
+                  isValid: PasswordValidator.hasMinLength(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneLowerCase,
-                  isValid: PasswordValidator.hasLowercase(widget.password),
+                  isValid: PasswordValidator.hasLowercase(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneUpperCase,
-                  isValid: PasswordValidator.hasUppercase(widget.password),
+                  isValid: PasswordValidator.hasUppercase(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneSpecialChar,
-                  isValid: PasswordValidator.hasSpecialChar(widget.password),
+                  isValid: PasswordValidator.hasSpecialChar(password),
                 ),
                 _ValidationItem(
                   label: AppStrings.passwordOneNumber,
-                  isValid: PasswordValidator.hasNumber(widget.password),
+                  isValid: PasswordValidator.hasNumber(password),
                 ),
               ],
             ),
@@ -97,8 +121,8 @@ class _ProgressBar extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: LinearProgressIndicator(
         value: progress,
-        backgroundColor: Colors.red.shade300,
-        color: Colors.green,
+        backgroundColor: AppColors.redLight,
+        color: AppColors.green,
         minHeight: 6,
       ),
     );
@@ -122,16 +146,15 @@ class _ValidationItem extends StatelessWidget {
         children: [
           Icon(
             isValid ? Icons.check_circle : Icons.radio_button_unchecked,
-            color: isValid ? Colors.green : Colors.grey,
+            color: isValid ? AppColors.green : AppColors.grey,
             size: 20,
           ),
           const SizedBox(width: 8),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 14,
-              color: isValid ? Colors.green : Colors.grey,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: isValid ? AppColors.green : AppColors.grey,
+                ),
           ),
         ],
       ),

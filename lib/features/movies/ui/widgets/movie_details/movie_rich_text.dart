@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app_task/core/themes/app_colors.dart';
 
 class MovieRichText extends StatelessWidget {
   const MovieRichText({
@@ -17,15 +18,14 @@ class MovieRichText extends StatelessWidget {
         children: [
           TextSpan(
             text: title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           TextSpan(
             text: value,
-            style: TextStyle(
-              color: Colors.grey[350],
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.greyLight,
             ),
           ),
         ],

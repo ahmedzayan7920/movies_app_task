@@ -1,6 +1,6 @@
 import 'app_strings.dart';
 
-class EmailValidator {
+abstract class EmailValidator {
   static final RegExp _emailRegExp = RegExp(
     r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+',
   );

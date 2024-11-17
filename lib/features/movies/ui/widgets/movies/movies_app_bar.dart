@@ -26,10 +26,7 @@ class MoviesAppBar extends StatelessWidget {
             child: const Icon(Icons.menu_outlined)),
         Text(
           AppStrings.popularMoviesTitle,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         GestureDetector(
           onTap: loginProvider.state is LoginLoadingState

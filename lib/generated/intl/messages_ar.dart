@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "تم توقع قائمة ولكن تم الحصول على "),
         "expectedMapError": MessageLookupByLibrary.simpleMessage(
             "تم توقع خريطة ولكن تم الحصول على "),
+        "fetchNextPageError": MessageLookupByLibrary.simpleMessage(
+            "تعذر جلب الصفحة التالية. يرجى المحاولة لاحقاً."),
         "invalidCredentials": MessageLookupByLibrary.simpleMessage(
             "بيانات تسجيل الدخول غير صالحة"),
         "languageTitle": MessageLookupByLibrary.simpleMessage("اللغة"),

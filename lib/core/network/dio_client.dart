@@ -1,32 +1,41 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../utils/app_strings.dart';
+import 'package:movies_app_task/core/network/api_keys.dart';
 
 import '../error/failure.dart';
-import 'api_keys.dart';
+import '../models/pagination_model.dart';
+import '../models/resource_model.dart';
+import '../utils/app_strings.dart';
 import 'base_api_service.dart';
 import 'dio_error_handler.dart';
 
-class DioClient implements BaseApiService {
+class DioClient extends BaseApiService {
   final Dio _dio;
 
   DioClient(this._dio);
 
   @override
-  Future<Either<Failure, T>> get<T, M>({
+  Future<Either<Failure, ResourceModel<T>>> get<T, M>({
     required String path,
     required M Function(Map<String, dynamic>) fromJson,
     Map<String, dynamic>? queryParameters,
-    String? dataKey,
   }) async {
     try {
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
-        options: Options(extra: {ApiKeys.responseDataKey: dataKey}),
       );
-      final data = _parseResponse<T, M>(response.data, fromJson);
-      return Right(data);
+
+      final responseData = response.data as Map<String, dynamic>;
+      final data = _parseData<T, M>(responseData[ApiKeys.dataKey], fromJson);
+      final pagination = responseData[ApiKeys.paginationKey] != null
+          ? PaginationModel.fromJson(responseData[ApiKeys.paginationKey])
+          : null;
+
+      return Right(ResourceModel<T>(
+        data: data,
+        pagination: pagination,
+      ));
     } on DioException catch (e) {
       return Left(handleDioError(e));
     } catch (e) {
@@ -35,7 +44,7 @@ class DioClient implements BaseApiService {
     }
   }
 
-  T _parseResponse<T, M>(
+  T _parseData<T, M>(
     dynamic data,
     M Function(Map<String, dynamic>) fromJson,
   ) {
@@ -51,7 +60,8 @@ class DioClient implements BaseApiService {
     } else if (data is Map<String, dynamic>) {
       return fromJson(data) as T;
     } else {
-      throw FormatException(AppStrings.expectedMapError + data.runtimeType.toString());
+      throw FormatException(
+          AppStrings.expectedMapError + data.runtimeType.toString());
     }
   }
 }

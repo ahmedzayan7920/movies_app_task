@@ -369,6 +369,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Unable to fetch the next page. Please try again later.`
+  String get fetchNextPageError {
+    return Intl.message(
+      'Unable to fetch the next page. Please try again later.',
+      name: 'fetchNextPageError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

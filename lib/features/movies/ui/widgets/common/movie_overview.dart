@@ -17,9 +17,7 @@ class MovieOverview extends StatelessWidget {
       maxLines: maxLines,
       textAlign: TextAlign.justify,
       overflow: maxLines == null ? null : TextOverflow.ellipsis,
-      style: const TextStyle(
-        color: Colors.white,
-      ),
+      style: Theme.of(context).textTheme.bodyMedium,
     );
   }
 }

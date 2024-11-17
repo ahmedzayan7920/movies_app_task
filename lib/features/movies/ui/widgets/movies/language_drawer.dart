@@ -24,8 +24,10 @@ class LanguageDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            child: Text(AppStrings.settingsTitle,
-                style: const TextStyle(color: Colors.white, fontSize: 24)),
+            child: Text(
+              AppStrings.settingsTitle,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           ListTile(
             title: Text(AppStrings.languageTitle),

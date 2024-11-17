@@ -40,5 +40,6 @@
     "settingsTitle": "الإعدادات",
     "languageTitle": "اللغة",
 
-    "popularMoviesTitle": "الأفلام الشهيرة"
+    "popularMoviesTitle": "الأفلام الشهيرة",
+    "fetchNextPageError": "تعذر جلب الصفحة التالية. يرجى المحاولة لاحقاً."
 }

@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Expected a List but got "),
         "expectedMapError":
             MessageLookupByLibrary.simpleMessage("Expected Map but got "),
+        "fetchNextPageError": MessageLookupByLibrary.simpleMessage(
+            "Unable to fetch the next page. Please try again later."),
         "invalidCredentials":
             MessageLookupByLibrary.simpleMessage("Invalid credentials"),
         "languageTitle": MessageLookupByLibrary.simpleMessage("Language"),

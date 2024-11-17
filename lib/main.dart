@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'core/localization/logic/language_provider.dart';
+import 'package:movies_app_task/core/themes/app_theme.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
+import 'core/localization/logic/language_provider.dart';
 import 'core/localization/logic/language_state.dart';
 import 'features/auth/logic/login_provider.dart';
 import 'features/auth/ui/views/login_view.dart';
@@ -57,7 +58,9 @@ class MainApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.dark(useMaterial3: true),
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.dark,
             onGenerateRoute: AppRouter.generateRoute,
             home: Consumer<LoginProvider>(
               builder:

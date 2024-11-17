@@ -4,13 +4,21 @@ import 'package:provider/provider.dart';
 import '../../../../core/app/app_routes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
-import '../../logic/form_validation_provider.dart';
-import '../../logic/form_validation_state.dart';
 import '../../logic/login_provider.dart';
 import '../../logic/login_state.dart';
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
+  const LoginButton({
+    super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+    required this.onValidationRequested,
+  });
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final VoidCallback onValidationRequested;
 
   @override
   Widget build(BuildContext context) {
@@ -27,32 +35,28 @@ class LoginButton extends StatelessWidget {
   }
 
   Future<void> _login(BuildContext context) async {
-    final formProvider = context.read<FormValidationProvider>();
     final loginProvider = context.read<LoginProvider>();
 
-    formProvider.enableValidation();
-
-    if (formProvider.state is! FormValidState) {
-      return;
-    }
-
-    await loginProvider.login(
-      formProvider.email,
-      formProvider.passwordState.password,
-    );
-
-    if (loginProvider.state is LoginSuccessState) {
-      if (context.mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.movies);
-      }
-    } else if (loginProvider.state is LoginFailureState && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text((loginProvider.state as LoginFailureState).message),
-          showCloseIcon: true,
-          behavior: SnackBarBehavior.floating,
-        ),
+    onValidationRequested();
+    if (formKey.currentState?.validate() == true) {
+      await loginProvider.login(
+        emailController.text,
+        passwordController.text,
       );
+
+      if (loginProvider.state is LoginSuccessState) {
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, AppRoutes.movies);
+        }
+      } else if (loginProvider.state is LoginFailureState && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text((loginProvider.state as LoginFailureState).message),
+            showCloseIcon: true,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
     }
   }
 }
