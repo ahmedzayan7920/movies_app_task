@@ -1,7 +1,7 @@
 import '../../../../core/models/resource_model.dart';
 import '../../models/movie_model.dart';
 
-sealed class MoviesState {
+abstract class MoviesState {
   const MoviesState();
 }
 

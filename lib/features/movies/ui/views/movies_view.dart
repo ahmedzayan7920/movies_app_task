@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../widgets/movies/language_drawer.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/app/di.dart';
-import '../../logic/movies/movies_provider.dart';
+import '../../logic/movies/movies_bloc.dart';
+import '../../logic/movies/movies_event.dart';
+import '../widgets/movies/language_drawer.dart';
 import '../widgets/movies/movies_app_bar.dart';
 import '../widgets/movies/movies_body.dart';
 
@@ -12,9 +13,8 @@ class MoviesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) =>
-          MoviesProvider(movieRepository: getIt()),
+    return BlocProvider(
+      create: (context) => MoviesBloc(movieRepository: getIt())..add(LoadPopularMoviesEvent()),
       child: const Scaffold(
         body: SafeArea(
           child: Padding(

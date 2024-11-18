@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app_task/core/themes/app_theme.dart';
+import 'package:movies_app_task/features/auth/logic/login_event.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
@@ -32,7 +33,8 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LoginBloc(authRepository: getIt()),
+          create: (context) =>
+              LoginBloc(authRepository: getIt())..add(CheckLoginStatusEvent()),
         ),
         BlocProvider(
           create: (context) => LanguageBloc(languageRepository: getIt())

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/widgets/custom_error_message.dart';
-import '../../../logic/movies/movies_provider.dart';
+import '../../../logic/movies/movies_bloc.dart';
+import '../../../logic/movies/movies_event.dart';
 import '../../../logic/movies/movies_state.dart';
 import 'movies_list_view.dart';
 
@@ -12,46 +15,60 @@ class MoviesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MoviesProvider>(
-      builder: (context, provider, child) {
-        final state = provider.state;
+    return BlocConsumer<MoviesBloc, MoviesState>(
+      listener: (context, state) {
+        if (state is MoviesErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
         return RefreshIndicator(
-          onRefresh: () => provider.loadPopularMovies(),
+          onRefresh: () async {
+            context.read<MoviesBloc>().add(LoadPopularMoviesEvent());
+          },
           child: Builder(
             builder: (context) {
-              switch (state) {
-                case MoviesLoadingState():
-                  return Skeletonizer(
-                    enabled: true,
-                    child: MoviesListView(movies: provider.fakeMovies),
-                  );
-                case MoviesLoadedState(
-                    :final moviesResource,
-                    :final isLoadingMore,
-                    :final error
-                  ):
-                  return Column(
-                    children: [
-                      Expanded(
-                        child: MoviesListView(
-                          movies: moviesResource.data,
-                          isLoadingMore: isLoadingMore,
-                          onLoadMore: provider.loadMoreMovies,
+              if (state is MoviesLoadingState) {
+                return Skeletonizer(
+                  enabled: true,
+                  child: MoviesListView(
+                    movies: List.generate(
+                      10,
+                      (_) => AppConstants.fakeMovieModel,
+                    ),
+                  ),
+                );
+              } else if (state is MoviesLoadedState) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: MoviesListView(
+                        movies: state.moviesResource.data,
+                        isLoadingMore: state.isLoadingMore,
+                        onLoadMore: () {
+                          context.read<MoviesBloc>().add(LoadMoreMoviesEvent());
+                        },
+                      ),
+                    ),
+                    if (state.error != null)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          state.error!,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-                      if (error != null)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            error,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                    ],
-                  );
-                case MoviesErrorState(:final message):
-                  return CustomErrorMessage(message: message);
+                  ],
+                );
+              } else if (state is MoviesErrorState) {
+                return CustomErrorMessage(message: state.message);
               }
+              return const SizedBox.shrink();
             },
           ),
         );
