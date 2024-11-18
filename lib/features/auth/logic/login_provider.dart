@@ -1,52 +1,43 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../repos/auth_repository.dart';
+import 'login_event.dart';
 import 'login_state.dart';
 
-class LoginProvider extends ChangeNotifier {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository _authRepository;
 
-  LoginProvider({required AuthRepository authRepository})
-      : _authRepository = authRepository {
-    checkLoginStatus();
+  LoginBloc({required AuthRepository authRepository})
+      : _authRepository = authRepository,
+        super(LoginInitialState()) {
+    on<LoginRequestEvent>(_onLoginRequested);
+    on<LogoutRequestEvent>(_onLogoutRequested);
+    on<CheckLoginStatusEvent>(_onCheckLoginStatus);
   }
 
-  LoginState _state = LoginInitialState();
-  LoginState get state => _state;
-
-  bool _isLoggedIn = false;
-  bool get isLoggedIn => _isLoggedIn;
-
-  void _setState(LoginState state) {
-    _state = state;
-    notifyListeners();
-  }
-
-  Future<void> login(String email, String password) async {
-    _setState(LoginLoadingState());
-    final result = await _authRepository.login(email, password);
+  Future<void> _onLoginRequested(
+      LoginRequestEvent event, Emitter<LoginState> emit) async {
+    emit(LoginLoadingState());
+    final result = await _authRepository.login(event.email, event.password);
     result.fold(
-      (failure) => _setState(LoginFailureState(failure.message)),
-      (success) {
-        _isLoggedIn = true;
-        _setState(LoginSuccessState());
-      },
+      (failure) => emit(LoginFailureState(failure.message)),
+      (_) => emit(LoginSuccessState()),
     );
   }
 
-  Future<void> logout() async {
-    _setState(LoginLoadingState());
+  Future<void> _onLogoutRequested(
+      LogoutRequestEvent event, Emitter<LoginState> emit) async {
+    emit(LoginLoadingState());
     final result = await _authRepository.logout();
     result.fold(
-      (failure) => _setState(LoginFailureState(failure.message)),
-      (_) {
-        _isLoggedIn = false;
-        _setState(LoginInitialState());
-      },
+      (failure) => emit(LoginFailureState(failure.message)),
+      (_) => emit(LoginInitialState()),
     );
   }
 
-  Future<void> checkLoginStatus() async {
-    _isLoggedIn = await _authRepository.isLoggedIn();
-    _setState(_isLoggedIn ? LoginSuccessState() : LoginInitialState());
+  Future<void> _onCheckLoginStatus(
+      CheckLoginStatusEvent event, Emitter<LoginState> emit) async {
+    final isLoggedIn = await _authRepository.isLoggedIn();
+    emit(isLoggedIn ? LoginSuccessState() : LoginInitialState());
   }
 }

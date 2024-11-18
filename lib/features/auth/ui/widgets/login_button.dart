@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/app/app_routes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
+import '../../logic/login_event.dart';
 import '../../logic/login_provider.dart';
 import '../../logic/login_state.dart';
 
@@ -15,6 +15,7 @@ class LoginButton extends StatelessWidget {
     required this.passwordController,
     required this.onValidationRequested,
   });
+
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -22,9 +23,20 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginProvider>(
-      builder: (context, loginProvider, _) {
-        final isLoading = loginProvider.state is LoginLoadingState;
+    return BlocConsumer<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginFailureState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              showCloseIcon: true,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        final isLoading = state is LoginLoadingState;
         return CustomElevatedButton(
           onPressed: isLoading ? null : () => _login(context),
           isLoading: isLoading,
@@ -35,28 +47,16 @@ class LoginButton extends StatelessWidget {
   }
 
   Future<void> _login(BuildContext context) async {
-    final loginProvider = context.read<LoginProvider>();
+    final loginBloc = context.read<LoginBloc>();
 
     onValidationRequested();
     if (formKey.currentState?.validate() == true) {
-      await loginProvider.login(
-        emailController.text,
-        passwordController.text,
+      loginBloc.add(
+        LoginRequestEvent(
+          email: emailController.text,
+          password: passwordController.text,
+        ),
       );
-
-      if (loginProvider.state is LoginSuccessState) {
-        if (context.mounted) {
-          Navigator.pushReplacementNamed(context, AppRoutes.movies);
-        }
-      } else if (loginProvider.state is LoginFailureState && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text((loginProvider.state as LoginFailureState).message),
-            showCloseIcon: true,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      }
     }
   }
 }

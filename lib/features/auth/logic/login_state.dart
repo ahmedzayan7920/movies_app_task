@@ -1,4 +1,4 @@
-sealed  class LoginState {}
+abstract class LoginState {}
 
 class LoginInitialState extends LoginState {}
 
