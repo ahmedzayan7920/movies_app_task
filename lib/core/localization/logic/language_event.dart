@@ -1,9 +1,9 @@
 abstract class LanguageEvent {}
 
-class LoadPreferredLanguage extends LanguageEvent {}
+class LoadPreferredLanguageEvent extends LanguageEvent {}
 
-class ChangeLanguage extends LanguageEvent {
+class ChangeLanguageEvent extends LanguageEvent {
   final String languageCode;
 
-  ChangeLanguage(this.languageCode);
+  ChangeLanguageEvent(this.languageCode);
 }

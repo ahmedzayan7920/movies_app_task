@@ -11,12 +11,12 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
   LanguageBloc({required LanguageRepository languageRepository})
       : _languageRepository = languageRepository,
         super(LanguageLoading()) {
-    on<LoadPreferredLanguage>(_onLoadPreferredLanguage);
-    on<ChangeLanguage>(_onChangeLanguage);
+    on<LoadPreferredLanguageEvent>(_onLoadPreferredLanguageEvent);
+    on<ChangeLanguageEvent>(_onChangeLanguageEvent);
   }
 
-  void _onLoadPreferredLanguage(
-      LoadPreferredLanguage event, Emitter<LanguageState> emit) {
+  void _onLoadPreferredLanguageEvent(
+      LoadPreferredLanguageEvent event, Emitter<LanguageState> emit) {
     final result = _languageRepository.getPreferredLanguage();
     result.fold(
       (failure) => emit(LanguageError(failure.message)),
@@ -24,8 +24,8 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     );
   }
 
-  Future<void> _onChangeLanguage(
-      ChangeLanguage event, Emitter<LanguageState> emit) async {
+  Future<void> _onChangeLanguageEvent(
+      ChangeLanguageEvent event, Emitter<LanguageState> emit) async {
     final result = await _languageRepository.saveLanguage(event.languageCode);
     result.fold(
       (failure) => emit(LanguageError(failure.message)),

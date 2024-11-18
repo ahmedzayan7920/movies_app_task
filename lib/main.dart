@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LanguageBloc(languageRepository: getIt())
-            ..add(LoadPreferredLanguage()),
+            ..add(LoadPreferredLanguageEvent()),
         ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(

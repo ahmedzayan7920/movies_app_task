@@ -45,7 +45,7 @@ class LanguageDrawer extends StatelessWidget {
                     groupValue: selectedLanguageCode,
                     onChanged: (newLanguageCode) {
                       if (newLanguageCode != null) {
-                        languageBloc.add(ChangeLanguage(newLanguageCode));
+                        languageBloc.add(ChangeLanguageEvent(newLanguageCode));
                         Navigator.pop(context);
                       }
                     },
