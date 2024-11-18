@@ -15,12 +15,14 @@ To log into the app, use these **test credentials**:
 > **Note:** These credentials are required for accessing the app's main features.
 
 ## 📥 Download the APK
-Download the latest version of the app [here](https://drive.google.com/file/d/17pa3FIAtvrds0hPyetuXFmE5epV0KAee/view?usp=sharing)
+Download the latest version of the app [here](https://drive.google.com/file/d/1YoVpDk61cVSoQC4mUcPi6lXlxD4-7c2G/view?usp=sharing)
 
 ## 🚀 Features
 
 - **Popular Movies List**: Browse the latest popular movies.
 - **Movie Details**: Access full details for each movie, including genre, release date, and ratings.
+- **Pagination**: Efficient infinite scrolling for the popular movies list.
+- **Caching**: Enhanced performance with `dio_cache_interceptor` and `dio_cache_interceptor_hive_store` for persistent local caching.
 - **Localization**: Supports English and Arabic languages with in-app language switching.
 - **Authentication**: Login screen with mock authentication.
 
