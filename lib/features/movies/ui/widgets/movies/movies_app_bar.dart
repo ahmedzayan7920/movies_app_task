@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/app/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../auth/logic/login_event.dart';
-import '../../../../auth/logic/login_provider.dart';
+import '../../../../auth/logic/login_bloc.dart';
 import '../../../../auth/logic/login_state.dart';
 
 class MoviesAppBar extends StatelessWidget {

@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app_task/core/themes/app_theme.dart';
-import 'package:provider/provider.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
-import 'core/localization/logic/language_provider.dart';
+import 'core/localization/logic/language_bloc.dart';
+import 'core/localization/logic/language_event.dart';
 import 'core/localization/logic/language_state.dart';
-import 'features/auth/logic/login_provider.dart';
+import 'features/auth/logic/login_bloc.dart';
 import 'features/auth/logic/login_state.dart';
 import 'features/auth/ui/views/login_view.dart';
 import 'features/movies/ui/views/movies_view.dart';
@@ -32,18 +32,15 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => LoginBloc(authRepository: getIt()),
+          create: (context) => LoginBloc(authRepository: getIt()),
         ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) =>
-              LanguageProvider(languageRepository: getIt()),
+        BlocProvider(
+          create: (context) => LanguageBloc(languageRepository: getIt())
+            ..add(LoadPreferredLanguage()),
         ),
       ],
-      child: Consumer<LanguageProvider>(
-        builder: (BuildContext context, LanguageProvider languageProvider,
-            Widget? child) {
-          final state = languageProvider.state;
-
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
           Locale locale = PlatformDispatcher.instance.locale;
           if (state is LanguageLoaded) {
             locale = state.locale;
@@ -64,7 +61,7 @@ class MainApp extends StatelessWidget {
             themeMode: ThemeMode.dark,
             onGenerateRoute: AppRouter.generateRoute,
             home: BlocBuilder<LoginBloc, LoginState>(
-              builder: (BuildContext context, LoginState state) {
+              builder: (context, state) {
                 if (state is LoginSuccessState) {
                   return const MoviesView();
                 }

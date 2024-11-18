@@ -1,9 +1,15 @@
 import '../../features/movies/models/movie_model.dart';
+import 'app_keys.dart';
+import 'app_strings.dart';
 
 abstract class AppConstants {
   static const String mockEmail = "ahmed@gmail.com";
   static const String mockPassword = "Ahmed@123";
   static const String baseImageUrl = "https://image.tmdb.org/t/p/w200";
+  static final List<Map<String, String>> supportedLanguages = [
+    {AppKeys.languageCode: 'en', AppKeys.languageLabel: AppStrings.englishLanguage},
+    {AppKeys.languageCode: 'ar', AppKeys.languageLabel: AppStrings.arabicLanguage},
+  ];
   static MovieModel fakeMovieModel = MovieModel(
     id: 0,
     title: 'Venom: The Last Dance',

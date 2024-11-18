@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../logic/login_event.dart';
-import '../../logic/login_provider.dart';
+import '../../logic/login_bloc.dart';
 import '../../logic/login_state.dart';
 
 class LoginButton extends StatelessWidget {

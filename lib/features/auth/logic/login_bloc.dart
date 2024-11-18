@@ -10,12 +10,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required AuthRepository authRepository})
       : _authRepository = authRepository,
         super(LoginInitialState()) {
-    on<LoginRequestEvent>(_onLoginRequested);
-    on<LogoutRequestEvent>(_onLogoutRequested);
-    on<CheckLoginStatusEvent>(_onCheckLoginStatus);
+    on<LoginRequestEvent>(_onLoginRequestEvent);
+    on<LogoutRequestEvent>(_onLogoutRequestEvent);
+    on<CheckLoginStatusEvent>(_onCheckLoginStatusEvent);
   }
 
-  Future<void> _onLoginRequested(
+  Future<void> _onLoginRequestEvent(
       LoginRequestEvent event, Emitter<LoginState> emit) async {
     emit(LoginLoadingState());
     final result = await _authRepository.login(event.email, event.password);
@@ -25,7 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
-  Future<void> _onLogoutRequested(
+  Future<void> _onLogoutRequestEvent(
       LogoutRequestEvent event, Emitter<LoginState> emit) async {
     emit(LoginLoadingState());
     final result = await _authRepository.logout();
@@ -35,7 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
-  Future<void> _onCheckLoginStatus(
+  Future<void> _onCheckLoginStatusEvent(
       CheckLoginStatusEvent event, Emitter<LoginState> emit) async {
     final isLoggedIn = await _authRepository.isLoggedIn();
     emit(isLoggedIn ? LoginSuccessState() : LoginInitialState());

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/app_keys.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/localization/logic/language_provider.dart';
+import '../../../../../core/localization/logic/language_bloc.dart';
+import '../../../../../core/localization/logic/language_event.dart';
 import '../../../../../core/localization/logic/language_state.dart';
+import '../../../../../core/utils/app_constants.dart';
+import '../../../../../core/utils/app_keys.dart';
 import '../../../../../core/utils/app_strings.dart';
 
 class LanguageDrawer extends StatelessWidget {
@@ -11,14 +13,6 @@ class LanguageDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final languageProvider = Provider.of<LanguageProvider>(context);
-    final state = languageProvider.state;
-
-    String? selectedLanguageCode;
-    if (state is LanguageLoaded) {
-      selectedLanguageCode = state.locale.languageCode;
-    }
-
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -32,22 +26,34 @@ class LanguageDrawer extends StatelessWidget {
           ListTile(
             title: Text(AppStrings.languageTitle),
           ),
-          ...languageProvider.supportedLanguages.map((language) {
-            final languageCode = language[AppKeys.languageCode]!;
-            final languageLabel = language[AppKeys.languageLabel]!;
+          BlocBuilder<LanguageBloc, LanguageState>(
+            builder: (context, state) {
+              String? selectedLanguageCode;
+              if (state is LanguageLoaded) {
+                selectedLanguageCode = state.locale.languageCode;
+              }
 
-            return RadioListTile<String>(
-              title: Text(languageLabel),
-              value: languageCode,
-              groupValue: selectedLanguageCode,
-              onChanged: (newLanguageCode) {
-                if (newLanguageCode != null) {
-                  languageProvider.changeLanguage(newLanguageCode);
-                  Navigator.pop(context);
-                }
-              },
-            );
-          }),
+              final languageBloc = context.read<LanguageBloc>();
+              return Column(
+                children: AppConstants.supportedLanguages.map((language) {
+                  final languageCode = language[AppKeys.languageCode]!;
+                  final languageLabel = language[AppKeys.languageLabel]!;
+
+                  return RadioListTile<String>(
+                    title: Text(languageLabel),
+                    value: languageCode,
+                    groupValue: selectedLanguageCode,
+                    onChanged: (newLanguageCode) {
+                      if (newLanguageCode != null) {
+                        languageBloc.add(ChangeLanguage(newLanguageCode));
+                        Navigator.pop(context);
+                      }
+                    },
+                  );
+                }).toList(),
+              );
+            },
+          ),
         ],
       ),
     );
