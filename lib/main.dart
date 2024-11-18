@@ -5,14 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app_task/core/themes/app_theme.dart';
-import 'package:movies_app_task/features/auth/logic/login_event.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
 import 'core/localization/logic/language_bloc.dart';
 import 'core/localization/logic/language_event.dart';
 import 'core/localization/logic/language_state.dart';
-import 'features/auth/logic/login_bloc.dart';
+import 'features/auth/logic/login_cubit.dart';
 import 'features/auth/logic/login_state.dart';
 import 'features/auth/ui/views/login_view.dart';
 import 'features/movies/ui/views/movies_view.dart';
@@ -34,7 +33,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) =>
-              LoginBloc(authRepository: getIt())..add(CheckLoginStatusEvent()),
+              LoginCubit(authRepository: getIt())..checkLoginStatus(),
         ),
         BlocProvider(
           create: (context) => LanguageBloc(languageRepository: getIt())
@@ -62,7 +61,7 @@ class MainApp extends StatelessWidget {
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.dark,
             onGenerateRoute: AppRouter.generateRoute,
-            home: BlocBuilder<LoginBloc, LoginState>(
+            home: BlocBuilder<LoginCubit, LoginState>(
               builder: (context, state) {
                 if (state is LoginSuccessState) {
                   return const MoviesView();

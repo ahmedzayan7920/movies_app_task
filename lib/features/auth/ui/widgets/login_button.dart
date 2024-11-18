@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
-import '../../logic/login_event.dart';
-import '../../logic/login_bloc.dart';
+import '../../logic/login_cubit.dart';
 import '../../logic/login_state.dart';
 
 class LoginButton extends StatelessWidget {
@@ -23,7 +22,7 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginBloc, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginFailureState) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -47,15 +46,13 @@ class LoginButton extends StatelessWidget {
   }
 
   Future<void> _login(BuildContext context) async {
-    final loginBloc = context.read<LoginBloc>();
+    final loginCubit = context.read<LoginCubit>();
 
     onValidationRequested();
     if (formKey.currentState?.validate() == true) {
-      loginBloc.add(
-        LoginRequestEvent(
-          email: emailController.text,
-          password: passwordController.text,
-        ),
+      loginCubit.login(
+        email: emailController.text,
+        password: passwordController.text,
       );
     }
   }

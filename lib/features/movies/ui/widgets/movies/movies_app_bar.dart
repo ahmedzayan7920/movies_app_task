@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/app/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
-import '../../../../auth/logic/login_event.dart';
-import '../../../../auth/logic/login_bloc.dart';
+import '../../../../auth/logic/login_cubit.dart';
 import '../../../../auth/logic/login_state.dart';
 
 class MoviesAppBar extends StatelessWidget {
@@ -12,7 +11,7 @@ class MoviesAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginBloc, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginInitialState) {
           Navigator.pushReplacementNamed(context, AppRoutes.login);
@@ -39,7 +38,7 @@ class MoviesAppBar extends StatelessWidget {
               onTap: isLoading
                   ? null
                   : () {
-                      context.read<LoginBloc>().add(LogoutRequestEvent());
+                      context.read<LoginCubit>().logout();
                     },
               child: const Icon(Icons.logout_outlined),
             ),
