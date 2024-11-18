@@ -5,8 +5,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/app/di.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/widgets/custom_error_message.dart';
-import '../../logic/movie_details/movie_details_bloc.dart';
-import '../../logic/movie_details/movie_details_event.dart';
+import '../../logic/movie_details/movie_details_cubit.dart';
 import '../../logic/movie_details/movie_details_state.dart';
 import '../widgets/common/blurred_background_image.dart';
 import '../widgets/movie_details/movie_details_item.dart';
@@ -19,10 +18,10 @@ class MovieDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MovieDetailsBloc(movieRepository: getIt())
-        ..add(LoadMovieDetailsEvent(movieId: movieId)),
+      create: (context) => MovieDetailsCubit(movieRepository: getIt())
+        ..loadMovieDetails(movieId: movieId),
       child: Scaffold(
-        body: BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
+        body: BlocConsumer<MovieDetailsCubit, MovieDetailsState>(
           listener: (context, state) {
             if (state is MovieDetailsErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -37,8 +36,8 @@ class MovieDetailsView extends StatelessWidget {
             return RefreshIndicator(
               onRefresh: () async {
                 context
-                    .read<MovieDetailsBloc>()
-                    .add(LoadMovieDetailsEvent(movieId: movieId));
+                    .read<MovieDetailsCubit>()
+                    .loadMovieDetails(movieId: movieId);
               },
               child: Builder(
                 builder: (context) {
