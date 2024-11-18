@@ -4,8 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/widgets/custom_error_message.dart';
-import '../../../logic/movies/movies_bloc.dart';
-import '../../../logic/movies/movies_event.dart';
+import '../../../logic/movies/movies_cubit.dart';
 import '../../../logic/movies/movies_state.dart';
 import 'movies_list_view.dart';
 
@@ -14,7 +13,7 @@ class MoviesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MoviesBloc, MoviesState>(
+    return BlocConsumer<MoviesCubit, MoviesState>(
       listener: (context, state) {
         if (state is MoviesErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -28,7 +27,7 @@ class MoviesBody extends StatelessWidget {
       builder: (context, state) {
         return RefreshIndicator(
           onRefresh: () async {
-            context.read<MoviesBloc>().add(LoadPopularMoviesEvent());
+            context.read<MoviesCubit>().loadPopularMovies();
           },
           child: Builder(
             builder: (context) {
@@ -50,7 +49,7 @@ class MoviesBody extends StatelessWidget {
                         movies: state.moviesResource.data,
                         isLoadingMore: state.isLoadingMore,
                         onLoadMore: () {
-                          context.read<MoviesBloc>().add(LoadMoreMoviesEvent());
+                          context.read<MoviesCubit>().loadMoreMovies();
                         },
                       ),
                     ),

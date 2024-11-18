@@ -2,32 +2,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_strings.dart';
 import '../../repos/movie_repository.dart';
-import 'movies_event.dart';
 import 'movies_state.dart';
 
-class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
+class MoviesCubit extends Cubit<MoviesState> {
   final MovieRepository _movieRepository;
 
-  MoviesBloc({required MovieRepository movieRepository})
+  MoviesCubit({required MovieRepository movieRepository})
       : _movieRepository = movieRepository,
-        super(const MoviesLoadingState()) {
-    on<LoadPopularMoviesEvent>(_onLoadPopularMoviesEvent);
-    on<LoadMoreMoviesEvent>(_onLoadMoreMoviesEvent);
-  }
+        super(const MoviesLoadingState());
 
-  Future<void> _onLoadPopularMoviesEvent(
-      LoadPopularMoviesEvent event, Emitter<MoviesState> emit) async {
+  Future<void> loadPopularMovies() async {
     emit(const MoviesLoadingState());
 
     final result = await _movieRepository.getPopularMovies();
     result.fold(
       (failure) => emit(MoviesErrorState(failure.message)),
-      (moviesResource) => emit(MoviesLoadedState(moviesResource: moviesResource)),
+      (moviesResource) =>
+          emit(MoviesLoadedState(moviesResource: moviesResource)),
     );
   }
 
-  Future<void> _onLoadMoreMoviesEvent(
-      LoadMoreMoviesEvent event, Emitter<MoviesState> emit) async {
+  Future<void> loadMoreMovies() async {
     final currentState = state;
     if (currentState is! MoviesLoadedState ||
         currentState.isLoadingMore ||
