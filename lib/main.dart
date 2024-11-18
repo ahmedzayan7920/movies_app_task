@@ -8,8 +8,7 @@ import 'package:movies_app_task/core/themes/app_theme.dart';
 
 import 'core/app/app_router.dart';
 import 'core/app/di.dart';
-import 'core/localization/logic/language_bloc.dart';
-import 'core/localization/logic/language_event.dart';
+import 'core/localization/logic/language_cubit.dart';
 import 'core/localization/logic/language_state.dart';
 import 'features/auth/logic/login_cubit.dart';
 import 'features/auth/logic/login_state.dart';
@@ -36,11 +35,11 @@ class MainApp extends StatelessWidget {
               LoginCubit(authRepository: getIt())..checkLoginStatus(),
         ),
         BlocProvider(
-          create: (context) => LanguageBloc(languageRepository: getIt())
-            ..add(LoadPreferredLanguageEvent()),
+          create: (context) => LanguageCubit(languageRepository: getIt())
+            ..loadPreferredLanguage(),
         ),
       ],
-      child: BlocBuilder<LanguageBloc, LanguageState>(
+      child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
           Locale locale = PlatformDispatcher.instance.locale;
           if (state is LanguageLoaded) {

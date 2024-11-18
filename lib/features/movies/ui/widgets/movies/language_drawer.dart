@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/localization/logic/language_bloc.dart';
-import '../../../../../core/localization/logic/language_event.dart';
+import '../../../../../core/localization/logic/language_cubit.dart';
 import '../../../../../core/localization/logic/language_state.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/app_keys.dart';
@@ -26,14 +25,14 @@ class LanguageDrawer extends StatelessWidget {
           ListTile(
             title: Text(AppStrings.languageTitle),
           ),
-          BlocBuilder<LanguageBloc, LanguageState>(
+          BlocBuilder<LanguageCubit, LanguageState>(
             builder: (context, state) {
               String? selectedLanguageCode;
               if (state is LanguageLoaded) {
                 selectedLanguageCode = state.locale.languageCode;
               }
 
-              final languageBloc = context.read<LanguageBloc>();
+              final languageBloc = context.read<LanguageCubit>();
               return Column(
                 children: AppConstants.supportedLanguages.map((language) {
                   final languageCode = language[AppKeys.languageCode]!;
@@ -45,7 +44,8 @@ class LanguageDrawer extends StatelessWidget {
                     groupValue: selectedLanguageCode,
                     onChanged: (newLanguageCode) {
                       if (newLanguageCode != null) {
-                        languageBloc.add(ChangeLanguageEvent(newLanguageCode));
+                        languageBloc.changeLanguage(
+                            languageCode: newLanguageCode);
                         Navigator.pop(context);
                       }
                     },
